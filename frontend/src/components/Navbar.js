@@ -1,0 +1,179 @@
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { ThemeContext } from '../App';
+import api from '../services/api';
+import {
+  LogOut, CheckSquare, LayoutDashboard, Calendar, Award,
+  User, Bell, Moon, Sun, Search, X
+} from 'lucide-react';
+import './Navbar.css';
+
+const Navbar = () => {
+  const { user, logout } = useAuth();
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [showNotifs, setShowNotifs] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      const fetchTasks = async () => {
+        try {
+          const res = await api.get('/tasks');
+          setTasks(res.data.tasks);
+          generateNotifications(res.data.tasks);
+        } catch (e) {}
+      };
+      fetchTasks();
+    }
+  }, [user, location.pathname]);
+
+  const generateNotifications = (taskList) => {
+    const now = new Date();
+    const notifs = [];
+
+    const overdue = taskList.filter(t => t.status === 'pending' && new Date(t.dueDate) < now);
+    if (overdue.length > 0) notifs.push({ text: `${overdue.length} task${overdue.length > 1 ? 's' : ''} overdue`, type: 'danger' });
+
+    const today = taskList.filter(t => {
+      const d = new Date(t.dueDate);
+      return t.status === 'pending' && d.toDateString() === now.toDateString();
+    });
+    if (today.length > 0) notifs.push({ text: `${today.length} task${today.length > 1 ? 's' : ''} due today`, type: 'warning' });
+
+    const tomorrow = taskList.filter(t => {
+      const d = new Date(t.dueDate);
+      const tom = new Date(now); tom.setDate(tom.getDate() + 1);
+      return t.status === 'pending' && d.toDateString() === tom.toDateString();
+    });
+    if (tomorrow.length > 0) notifs.push({ text: `${tomorrow.length} task${tomorrow.length > 1 ? 's' : ''} due tomorrow`, type: 'info' });
+
+    const turnedIn = taskList.filter(t => t.turnedIn);
+    if (turnedIn.length > 0) notifs.push({ text: `${turnedIn.length} assignment${turnedIn.length > 1 ? 's' : ''} turned in`, type: 'success' });
+
+    setNotifications(notifs);
+  };
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    if (!query.trim()) { setSearchResults([]); return; }
+    const results = tasks.filter(t =>
+      t.title.toLowerCase().includes(query.toLowerCase()) ||
+      (t.subject && t.subject.toLowerCase().includes(query.toLowerCase()))
+    );
+    setSearchResults(results.slice(0, 5));
+  };
+
+  const handleLogout = () => { logout(); navigate('/login'); };
+
+  const navLinks = [
+    { to: '/dashboard', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
+    { to: '/calendar', icon: <Calendar size={18} />, label: 'Calendar' },
+    { to: '/grades', icon: <Award size={18} />, label: 'Grades' },
+    { to: '/profile', icon: <User size={18} />, label: 'Profile' },
+  ];
+
+  return (
+    <nav className="navbar">
+      <div className="container navbar-container">
+        <Link to="/" className="navbar-brand">
+          <CheckSquare size={24} />
+          <span>TâcheFlow</span>
+        </Link>
+
+        <div className="navbar-menu">
+          {user && (
+            <>
+              <div className="navbar-nav">
+                {navLinks.map(link => (
+                  <Link key={link.to} to={link.to} className={`nav-link ${location.pathname === link.to ? 'active' : ''}`}>
+                    {link.icon} {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Search */}
+              <div className="nav-search-wrapper">
+                <button className="nav-icon-btn" onClick={() => setShowSearch(!showSearch)} title="Search">
+                  <Search size={18} />
+                </button>
+                {showSearch && (
+                  <div className="search-dropdown">
+                    <div className="search-input-wrap">
+                      <Search size={16} />
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={e => handleSearch(e.target.value)}
+                        placeholder="Search tasks..."
+                        autoFocus
+                      />
+                      <button onClick={() => { setShowSearch(false); setSearchQuery(''); setSearchResults([]); }}><X size={16} /></button>
+                    </div>
+                    {searchResults.length > 0 && (
+                      <div className="search-results">
+                        {searchResults.map(t => (
+                          <div key={t._id} className="search-result-item" onClick={() => { navigate(`/task/${t._id}`); setShowSearch(false); }}>
+                            <span className="sr-title">{t.title}</span>
+                            {t.subject && <span className="sr-subject">{t.subject}</span>}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Notifications */}
+              <div className="nav-notif-wrapper">
+                <button className="nav-icon-btn" onClick={() => setShowNotifs(!showNotifs)} title="Notifications">
+                  <Bell size={18} />
+                  {notifications.length > 0 && <span className="notif-badge">{notifications.length}</span>}
+                </button>
+                {showNotifs && (
+                  <div className="notif-dropdown">
+                    <div className="notif-header">Notifications</div>
+                    {notifications.length === 0 ? (
+                      <div className="notif-empty">All caught up! 🎉</div>
+                    ) : (
+                      notifications.map((n, i) => (
+                        <div key={i} className={`notif-item notif-${n.type}`}>{n.text}</div>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Dark mode */}
+              <button className="nav-icon-btn" onClick={toggleDarkMode} title={darkMode ? 'Light mode' : 'Dark mode'}>
+                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
+            </>
+          )}
+
+          {user ? (
+            <div className="navbar-user">
+              <span className="user-welcome">Hi, {user.name}!</span>
+              <button onClick={handleLogout} className="btn btn-secondary navbar-btn">
+                <LogOut size={18} /> Logout
+              </button>
+            </div>
+          ) : (
+            <div className="navbar-auth">
+              <Link to="/login" className="btn btn-secondary navbar-btn">Login</Link>
+              <Link to="/register" className="btn btn-primary navbar-btn">Register</Link>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

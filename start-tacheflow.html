@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TâcheFlow Launcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        h1 { font-size: 2.5em; margin-bottom: 20px; }
+        p { font-size: 1.2em; margin-bottom: 30px; }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .status {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 TâcheFlow</h1>
+        <h2>Smart Task Management System</h2>
+        <p>Your personal academic task organizer is ready!</p>
+        
+        <div>
+            <a href="http://localhost:3000" class="btn" target="_blank">
+                📱 Open Web App
+            </a>
+            <a href="http://localhost:5000" class="btn" target="_blank">
+                🔧 API Server
+            </a>
+        </div>
+        
+        <div class="status">
+            <h3>📋 Quick Start Guide:</h3>
+            <p>1. Click "Open Web App" above</p>
+            <p>2. Register your student account</p>
+            <p>3. Start managing your tasks!</p>
+            <br>
+            <p><strong>Features:</strong> Create tasks, set due dates, mark complete, filter by status</p>
+        </div>
+        
+        <div class="status">
+            <h3>🛠️ Need Help Starting Servers?</h3>
+            <p>If the web app doesn't load, run these commands in PowerShell:</p>
+            <code style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 5px; display: block; margin: 10px 0;">
+                cd "C:\Users\johnl\Documents\TâcheFlow"<br>
+                npm run dev
+            </code>
+        </div>
+    </div>
+    
+    <script>
+        // Auto-refresh every 5 seconds to check server status
+        setTimeout(function() {
+            fetch('http://localhost:3000')
+                .then(response => {
+                    if (response.ok) {
+                        document.querySelector('.status').innerHTML = 
+                            '<h3 style="color: #2ecc71;">✅ Frontend Server Running!</h3>';
+                    }
+                })
+                .catch(err => {
+                    document.querySelector('.status').innerHTML = 
+                        '<h3 style="color: #e74c3c;">❌ Frontend Not Running</h3><p>Please start the servers using the commands below.</p>';
+                });
+        }, 2000);
+    </script>
+</body>
+</html>

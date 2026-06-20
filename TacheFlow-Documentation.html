@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TâcheFlow — Project Status Documentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: #1a202c;
+  line-height: 1.8;
+  background: #fff;
+  font-size: 11pt;
+}
+
+@media print {
+  body { font-size: 10pt; }
+  .page-break { page-break-before: always; }
+  .cover-page { page-break-after: always; }
+  .section-page { page-break-before: always; }
+}
+
+.page { max-width: 800px; margin: 0 auto; padding: 40px 50px; }
+
+/* Cover */
+.cover-page {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 60px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-bottom: 4px solid #667eea;
+}
+.cover-photo {
+  width: 150px; height: 150px; border-radius: 50%; overflow: hidden;
+  border: 4px solid #667eea; margin-bottom: 28px;
+  box-shadow: 0 8px 32px rgba(102,126,234,0.2);
+}
+.cover-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.cover-title { font-size: 2.8rem; font-weight: 900; color: #1a202c; margin-bottom: 8px; }
+.cover-subtitle { font-size: 1.3rem; font-weight: 600; color: #667eea; margin-bottom: 8px; }
+.cover-desc { font-size: 1rem; color: #718096; margin-bottom: 40px; }
+.cover-info {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+  padding: 24px 36px; width: 100%; max-width: 420px; text-align: left;
+}
+.cover-info table { width: 100%; }
+.cover-info td { padding: 6px 0; font-size: 0.92rem; }
+.cover-info td:first-child { font-weight: 600; color: #4a5568; width: 130px; }
+
+/* Headings */
+h1 {
+  font-size: 2rem; font-weight: 900; color: #1a202c;
+  margin: 48px 0 20px; padding-bottom: 12px;
+  border-bottom: 3px solid #667eea;
+}
+h2 { font-size: 1.4rem; font-weight: 700; color: #2d3748; margin: 32px 0 12px; }
+h3 { font-size: 1.1rem; font-weight: 700; color: #4a5568; margin: 20px 0 8px; }
+p { margin-bottom: 14px; color: #2d3748; }
+
+/* Table of contents */
+.toc {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+  padding: 24px 32px; margin: 24px 0;
+}
+.toc h2 { margin-top: 0; border: none; font-size: 1.3rem; }
+.toc ol { padding-left: 24px; }
+.toc li { padding: 6px 0; font-size: 1rem; }
+.toc a { color: #667eea; text-decoration: none; font-weight: 600; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 0.9rem; }
+th { background: #667eea; color: white; padding: 10px 14px; text-align: left; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+td { padding: 10px 14px; border-bottom: 1px solid #e2e8f0; }
+tr:nth-child(even) { background: #f8fafc; }
+.done { color: #38a169; font-weight: 700; }
+
+/* Lists */
+ul, ol { padding-left: 24px; margin: 8px 0 16px; }
+li { padding: 4px 0; }
+
+/* Code */
+pre {
+  background: #1a202c; color: #e2e8f0; padding: 16px 20px; border-radius: 10px;
+  font-size: 0.82rem; line-height: 1.5; overflow-x: auto; margin: 16px 0;
+  font-family: 'Courier New', monospace;
+}
+
+/* Phase cards */
+.phase {
+  background: #f8fafc; border-left: 4px solid #667eea; border-radius: 0 12px 12px 0;
+  padding: 20px 24px; margin: 20px 0;
+}
+.phase-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.phase-num {
+  background: #667eea; color: white; width: 30px; height: 30px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem;
+}
+.phase-title { font-weight: 700; font-size: 1.05rem; color: #1a202c; }
+.phase-week { font-size: 0.8rem; color: #667eea; font-weight: 600; margin-left: auto; }
+
+/* SDLC flow */
+.sdlc-flow {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+  margin: 24px 0; padding: 20px; background: #f8fafc; border-radius: 12px;
+}
+.sdlc-step {
+  background: linear-gradient(135deg, #667eea, #764ba2); color: white;
+  padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 0.82rem;
+}
+.sdlc-arrow { display: flex; align-items: center; color: #667eea; font-size: 1.1rem; font-weight: 700; }
+
+/* Diagrams */
+.diagram {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+  padding: 24px; margin: 20px 0; text-align: center;
+}
+.diagram-box {
+  display: inline-block; background: white; border: 2px solid #667eea;
+  border-radius: 10px; padding: 14px 24px; font-weight: 600; font-size: 0.9rem;
+}
+.diagram-arrow { display: block; text-align: center; font-size: 1.2rem; color: #667eea; margin: 6px 0; }
+.diagram-label { font-size: 0.75rem; color: #718096; margin-top: 4px; }
+
+/* UI Screenshots section */
+.ui-section { margin: 24px 0; }
+.ui-card {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px;
+  margin-bottom: 32px; overflow: hidden;
+}
+.ui-card-header {
+  background: #667eea; color: white; padding: 12px 20px;
+  font-weight: 700; font-size: 1rem;
+}
+.ui-card-body { padding: 20px; }
+.ui-mockup {
+  background: #1a202c; border-radius: 12px; padding: 16px; color: #e2e8f0;
+  font-size: 0.78rem; margin-bottom: 16px;
+}
+.ui-desc { color: #4a5568; font-size: 0.9rem; line-height: 1.6; }
+
+/* Mockup internal styles */
+.m-topbar { background: #2d3748; padding: 8px 12px; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.m-dots { display: flex; gap: 5px; }
+.m-dots span { width: 8px; height: 8px; border-radius: 50%; }
+.m-dots span:nth-child(1) { background: #f56565; }
+.m-dots span:nth-child(2) { background: #f6ad55; }
+.m-dots span:nth-child(3) { background: #48bb78; }
+.m-title { color: #a0aec0; font-size: 0.7rem; font-weight: 600; }
+
+.m-stats { display: flex; gap: 8px; margin-bottom: 12px; }
+.m-stat { flex: 1; background: rgba(102,126,234,0.2); padding: 8px; border-radius: 8px; text-align: center; }
+.m-stat-num { font-size: 1rem; font-weight: 800; color: white; display: block; }
+.m-stat-lbl { font-size: 0.6rem; color: #a0aec0; }
+
+.m-task { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-bottom: 1px solid #2d3748; }
+.m-dot { width: 6px; height: 6px; border-radius: 50%; }
+.m-dot-green { background: #48bb78; }
+.m-dot-orange { background: #f6ad55; }
+.m-dot-red { background: #f56565; }
+.m-dot-blue { background: #667eea; }
+.m-task-text { flex: 1; color: #e2e8f0; font-size: 0.72rem; }
+.m-badge { padding: 2px 6px; border-radius: 4px; font-size: 0.6rem; font-weight: 700; }
+.m-badge-green { background: rgba(72,187,120,0.2); color: #48bb78; }
+.m-badge-orange { background: rgba(246,173,85,0.2); color: #f6ad55; }
+.m-badge-red { background: rgba(245,101,101,0.2); color: #f56565; }
+
+.m-form { background: #2d3748; border-radius: 8px; padding: 12px; margin-top: 8px; }
+.m-form-title { color: white; font-weight: 700; font-size: 0.8rem; margin-bottom: 8px; border-bottom: 1px solid #4a5568; padding-bottom: 6px; }
+.m-field { margin-bottom: 6px; }
+.m-field label { display: block; color: #a0aec0; font-size: 0.6rem; margin-bottom: 2px; }
+.m-input { background: #1a202c; border: 1px solid #4a5568; border-radius: 4px; padding: 4px 8px; color: #e2e8f0; font-size: 0.68rem; display: block; width: 100%; }
+.m-btn { display: inline-block; background: linear-gradient(135deg,#667eea,#764ba2); color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.68rem; font-weight: 700; margin-top: 8px; }
+
+.m-auth { background: linear-gradient(135deg,#667eea,#764ba2); border-radius: 8px; padding: 16px; display: flex; justify-content: center; }
+.m-auth-card { background: white; border-radius: 10px; padding: 14px; width: 200px; color: #1a202c; }
+.m-auth-title { font-size: 0.85rem; font-weight: 800; text-align: center; margin-bottom: 3px; }
+.m-auth-sub { font-size: 0.65rem; color: #718096; text-align: center; margin-bottom: 8px; }
+.m-auth-field { margin-bottom: 5px; }
+.m-auth-field label { display: block; font-size: 0.58rem; font-weight: 600; color: #4a5568; margin-bottom: 2px; }
+.m-auth-input { display: block; width: 100%; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 4px 6px; font-size: 0.65rem; color: #2d3748; }
+.m-auth-btn { display: block; width: 100%; background: linear-gradient(135deg,#667eea,#764ba2); color: white; text-align: center; padding: 5px; border-radius: 6px; font-size: 0.68rem; font-weight: 700; margin-top: 8px; }
+
+/* Divider */
+hr.divider { border: none; border-top: 2px solid #e2e8f0; margin: 48px 0; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ COVER PAGE ═══════════════ -->
+<div class="cover-page">
+  <div class="cover-photo">
+    <img src="frontend/public/profile.jpg.jpg" alt="John Lloyd Patosa" onerror="this.parentElement.innerHTML='<div style=&quot;width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;font-weight:900&quot;>JLP</div>'">
+  </div>
+  <div class="cover-title">TâcheFlow</div>
+  <div class="cover-subtitle">Project Status Documentation</div>
+  <div class="cover-desc">Smart Task Management System for Students</div>
+
+  <div class="cover-info">
+    <table>
+      <tr><td>Developer:</td><td>John Lloyd Patosa</td></tr>
+      <tr><td>Course:</td><td>BS Computer Engineering</td></tr>
+      <tr><td>Institution:</td><td>Lyceum of the Philippines University – Davao</td></tr>
+      <tr><td>Date:</td><td>June 2025</td></tr>
+      <tr><td>Status:</td><td style="color:#38a169; font-weight:700;">✅ Completed</td></tr>
+      <tr><td>Email:</td><td>johnlloydpatosa@yahoo.com</td></tr>
+      <tr><td>Phone:</td><td>+63 976 495 3989</td></tr>
+      <tr><td>Location:</td><td>Indangan, Davao City</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<div class="page">
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><a href="#title">Title</a></li>
+    <li><a href="#introduction">Introduction About the System</a></li>
+    <li><a href="#sdlc">Software Development Life Cycle</a></li>
+    <li><a href="#ui">Current UI of the System</a></li>
+  </ol>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════ SECTION 1: TITLE ═══════════════ -->
+<h1 id="title">Title</h1>
+
+<h2>TâcheFlow — Smart Task Management System for Students</h2>
+
+<table>
+  <tr><th>Item</th><th>Details</th></tr>
+  <tr><td>Project Name</td><td><strong>TâcheFlow</strong></td></tr>
+  <tr><td>Type</td><td>Full-Stack Web Application (Single Page Application)</td></tr>
+  <tr><td>Target Users</td><td>University / College Students</td></tr>
+  <tr><td>Architecture</td><td>MERN Stack (MongoDB, Express.js, React.js, Node.js)</td></tr>
+  <tr><td>Development Model</td><td>Agile SDLC (Iterative Sprints)</td></tr>
+  <tr><td>Development Period</td><td>4 Weeks (2025)</td></tr>
+  <tr><td>Developer</td><td>John Lloyd Patosa</td></tr>
+  <tr><td>Course</td><td>BS Computer Engineering</td></tr>
+  <tr><td>Institution</td><td>Lyceum of the Philippines University – Davao</td></tr>
+  <tr><td>Current Status</td><td class="done">✅ Completed</td></tr>
+</table>
+
+<h2>Project Purpose</h2>
+<p>TâcheFlow was developed to address the challenge of academic task management for students. Many students struggle to keep track of deadlines, assignments, and project milestones across multiple courses. TâcheFlow provides a focused, distraction-free tool with intelligent due-date awareness and real-time progress analytics.</p>
+
+<h2>Technology Stack</h2>
+<table>
+  <tr><th>Layer</th><th>Technology</th><th>Purpose</th></tr>
+  <tr><td>Frontend</td><td>React.js 18, React Router v6, Context API, CSS3</td><td>User interface &amp; navigation</td></tr>
+  <tr><td>Backend</td><td>Node.js, Express.js, JWT, bcryptjs</td><td>REST API &amp; authentication</td></tr>
+  <tr><td>Database</td><td>MongoDB, Mongoose ODM</td><td>Data storage &amp; retrieval</td></tr>
+  <tr><td>Tools</td><td>Git, VS Code, Postman, npm</td><td>Development &amp; testing</td></tr>
+</table>
+
+<hr class="divider">
+
+<!-- ═══════════════ SECTION 2: INTRODUCTION ═══════════════ -->
+<h1 id="introduction">Introduction About the System</h1>
+
+<h2>What is TâcheFlow?</h2>
+<p>TâcheFlow is a full-stack web application designed to help students manage their academic tasks efficiently. Built using the MERN stack (MongoDB, Express.js, React.js, Node.js), it provides a modern, responsive interface where students can create, organise, track, and complete their academic workload.</p>
+
+<h2>Problem Statement</h2>
+<p>University students often juggle multiple courses, each with their own assignments, projects, and deadlines. Without a dedicated tool, tasks are easily forgotten or deprioritised, leading to missed deadlines and poor academic performance. Existing tools are either too complex (Jira, Asana) or too simple (sticky notes, text files) for student needs.</p>
+
+<h2>Proposed Solution</h2>
+<p>TâcheFlow solves this by providing:</p>
+<ul>
+  <li><strong>Quick task creation</strong> — Add a task with title, description, and due date in seconds</li>
+  <li><strong>Visual urgency indicators</strong> — Colour-coded badges (Overdue, Today, Tomorrow, Soon, Normal) show what needs attention first</li>
+  <li><strong>One-click status toggle</strong> — Switch tasks between pending and completed instantly</li>
+  <li><strong>Live dashboard analytics</strong> — See total, pending, completed, and overdue counts at a glance</li>
+  <li><strong>Filter system</strong> — View only the tasks you need (All / Pending / Completed / Overdue)</li>
+  <li><strong>Secure accounts</strong> — Each student has their own private account with encrypted passwords</li>
+</ul>
+
+<h2>System Architecture</h2>
+<div class="diagram">
+  <div class="diagram-box">
+    <strong>Frontend — React.js</strong><br>
+    <span class="diagram-label">Port 3000 • SPA • React Router • Context API • CSS3</span>
+  </div>
+  <div class="diagram-arrow">⬇ HTTP REST API Requests ⬇</div>
+  <div class="diagram-box">
+    <strong>Backend — Node.js / Express.js</strong><br>
+    <span class="diagram-label">Port 5000 • REST API • JWT Auth • bcrypt • CORS Middleware</span>
+  </div>
+  <div class="diagram-arrow">⬇ Mongoose ODM Queries ⬇</div>
+  <div class="diagram-box">
+    <strong>Database — MongoDB</strong><br>
+    <span class="diagram-label">Users Collection • Tasks Collection • Schema Validation • Indexes</span>
+  </div>
+</div>
+
+<h2>Key Features</h2>
+<table>
+  <tr><th>#</th><th>Feature</th><th>Description</th><th>Status</th></tr>
+  <tr><td>1</td><td>User Registration</td><td>Create account with name, email, and password (hashed)</td><td class="done">✅ Done</td></tr>
+  <tr><td>2</td><td>User Login</td><td>Authenticate with JWT token (7-day expiry)</td><td class="done">✅ Done</td></tr>
+  <tr><td>3</td><td>Create Task</td><td>Add task with title, description, due date</td><td class="done">✅ Done</td></tr>
+  <tr><td>4</td><td>Edit Task</td><td>Update any field of an existing task</td><td class="done">✅ Done</td></tr>
+  <tr><td>5</td><td>Delete Task</td><td>Remove task permanently</td><td class="done">✅ Done</td></tr>
+  <tr><td>6</td><td>Toggle Status</td><td>One-click switch between pending ↔ completed</td><td class="done">✅ Done</td></tr>
+  <tr><td>7</td><td>Task Filtering</td><td>Filter by All / Pending / Completed / Overdue</td><td class="done">✅ Done</td></tr>
+  <tr><td>8</td><td>Dashboard Analytics</td><td>Real-time stat cards (total, pending, completed)</td><td class="done">✅ Done</td></tr>
+  <tr><td>9</td><td>Due-Date Intelligence</td><td>Colour-coded urgency badges</td><td class="done">✅ Done</td></tr>
+  <tr><td>10</td><td>Responsive Design</td><td>Works on mobile, tablet, and desktop</td><td class="done">✅ Done</td></tr>
+  <tr><td>11</td><td>Professional UI</td><td>Gradient design system, Inter font, animations</td><td class="done">✅ Done</td></tr>
+</table>
+
+<h2>Security Features</h2>
+<table>
+  <tr><th>Security Measure</th><th>Implementation</th></tr>
+  <tr><td>Password Hashing</td><td>bcrypt with 10 salt rounds — plaintext never stored</td></tr>
+  <tr><td>Authentication</td><td>JWT tokens signed with secret, 7-day expiry</td></tr>
+  <tr><td>Route Protection</td><td>Auth middleware validates token on protected endpoints</td></tr>
+  <tr><td>Data Isolation</td><td>Users can only access their own tasks</td></tr>
+  <tr><td>Input Validation</td><td>Mongoose schema validators prevent invalid data</td></tr>
+  <tr><td>CORS</td><td>Restricted to known frontend origin only</td></tr>
+  <tr><td>Secrets</td><td>All sensitive values in .env, excluded from version control</td></tr>
+</table>
+
+<hr class="divider">
+
+<!-- ═══════════════ SECTION 3: SDLC ═══════════════ -->
+<h1 id="sdlc">Software Development Life Cycle (SDLC)</h1>
+
+<p>The project followed the <strong>Agile SDLC Model</strong> with iterative development sprints. Each phase built upon the previous one, allowing continuous improvement and refinement throughout the 4-week timeline.</p>
+
+<h2>SDLC Phases</h2>
+<div class="sdlc-flow">
+  <div class="sdlc-step">1. Planning</div>
+  <div class="sdlc-arrow">→</div>
+  <div class="sdlc-step">2. Design</div>
+  <div class="sdlc-arrow">→</div>
+  <div class="sdlc-step">3. Implementation</div>
+  <div class="sdlc-arrow">→</div>
+  <div class="sdlc-step">4. Testing</div>
+  <div class="sdlc-arrow">→</div>
+  <div class="sdlc-step">5. Deployment</div>
+  <div class="sdlc-arrow">→</div>
+  <div class="sdlc-step">6. Maintenance</div>
+</div>
+
+<!-- Phase 1 -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">1</div>
+    <div class="phase-title">Planning &amp; Requirements Gathering</div>
+    <div class="phase-week">Week 1</div>
+  </div>
+  <h3>Activities:</h3>
+  <ul>
+    <li>Identified target users (university students) and their pain points</li>
+    <li>Defined functional requirements: task CRUD, authentication, dashboard, filtering</li>
+    <li>Defined non-functional requirements: responsive design, security, performance</li>
+    <li>Created user stories and use cases</li>
+    <li>Selected MERN stack as the technology</li>
+    <li>Established 4-week project timeline with milestones</li>
+  </ul>
+  <h3>Deliverables:</h3>
+  <ul>
+    <li>Requirements specification</li>
+    <li>User stories document</li>
+    <li>Technology selection rationale</li>
+    <li>Project timeline</li>
+  </ul>
+</div>
+
+<!-- Phase 2 -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">2</div>
+    <div class="phase-title">System Design</div>
+    <div class="phase-week">Week 1–2</div>
+  </div>
+  <h3>Activities:</h3>
+  <ul>
+    <li>Designed three-tier architecture (Frontend → Backend → Database)</li>
+    <li>Created MongoDB schemas for Users and Tasks collections</li>
+    <li>Designed RESTful API endpoints</li>
+    <li>Wireframed UI layouts for Login, Register, Dashboard screens</li>
+    <li>Planned React component hierarchy and state management approach</li>
+  </ul>
+  <h3>Database Schema:</h3>
+<pre>User Collection:
+├── name (String, required)
+├── email (String, unique, indexed)
+├── password (String, bcrypt hashed)
+└── createdAt (Date)
+
+Task Collection:
+├── title (String, required)
+├── description (String)
+├── dueDate (Date)
+├── status ("pending" | "completed")
+├── userId (Reference → User)
+└── createdAt (Date)</pre>
+  <h3>API Design:</h3>
+  <table>
+    <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+    <tr><td>POST</td><td>/api/auth/register</td><td>Create new account</td></tr>
+    <tr><td>POST</td><td>/api/auth/login</td><td>Authenticate &amp; get JWT</td></tr>
+    <tr><td>GET</td><td>/api/tasks</td><td>Get all user's tasks</td></tr>
+    <tr><td>POST</td><td>/api/tasks</td><td>Create new task</td></tr>
+    <tr><td>PUT</td><td>/api/tasks/:id</td><td>Update task</td></tr>
+    <tr><td>DELETE</td><td>/api/tasks/:id</td><td>Delete task</td></tr>
+  </table>
+</div>
+
+<!-- Phase 3 -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">3</div>
+    <div class="phase-title">Implementation (Coding)</div>
+    <div class="phase-week">Week 2–3</div>
+  </div>
+  <h3>Backend Development (Week 2):</h3>
+  <ul>
+    <li>Set up Express.js server on port 5000</li>
+    <li>Connected to MongoDB via Mongoose ODM</li>
+    <li>Implemented User model with bcrypt password hashing</li>
+    <li>Built register &amp; login endpoints with JWT generation</li>
+    <li>Created authentication middleware for protected routes</li>
+    <li>Implemented Task CRUD API (Create, Read, Update, Delete)</li>
+    <li>Configured CORS and environment variables</li>
+  </ul>
+  <h3>Frontend Development (Week 3):</h3>
+  <ul>
+    <li>Set up React 18 with Create React App</li>
+    <li>Implemented React Router v6 for navigation</li>
+    <li>Built AuthContext for global auth state management</li>
+    <li>Created Login and Register pages with validation</li>
+    <li>Developed Dashboard with stat cards and task grid</li>
+    <li>Built TaskCard with one-click status toggle</li>
+    <li>Created TaskForm modal for create/edit operations</li>
+    <li>Connected frontend to backend via API service layer</li>
+    <li>Implemented task filtering (All/Pending/Completed/Overdue)</li>
+  </ul>
+</div>
+
+<!-- Phase 4 -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">4</div>
+    <div class="phase-title">Testing &amp; Quality Assurance</div>
+    <div class="phase-week">Week 3–4</div>
+  </div>
+  <h3>Testing Performed:</h3>
+  <table>
+    <tr><th>Test Case</th><th>Result</th></tr>
+    <tr><td>Register with valid credentials</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Register with existing email → shows error</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Login with correct password → JWT returned</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Login with wrong password → error shown</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Access dashboard without token → redirected</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Create task → appears in grid</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Edit task → changes saved</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Delete task → removed from grid</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Toggle status → pending ↔ completed</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Filter buttons work correctly</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Due-date badges show correct colours</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Responsive design at 320px (mobile)</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Responsive design at 1920px (desktop)</td><td class="done">✅ Pass</td></tr>
+    <tr><td>Cross-browser (Chrome, Firefox, Edge)</td><td class="done">✅ Pass</td></tr>
+  </table>
+</div>
+
+<!-- Phase 5 -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">5</div>
+    <div class="phase-title">UI/UX Improvement &amp; Deployment</div>
+    <div class="phase-week">Week 4</div>
+  </div>
+  <h3>UI Improvements Made:</h3>
+  <ul>
+    <li>Complete visual redesign with professional design system</li>
+    <li>Inter font family (Google Fonts) for modern typography</li>
+    <li>Gradient colour scheme (#667eea → #764ba2)</li>
+    <li>Smooth hover animations and transitions</li>
+    <li>Backdrop blur effects on modals</li>
+    <li>Colour-coded due-date badges (5 urgency levels)</li>
+    <li>Card elevation with shadow system</li>
+    <li>4 responsive breakpoints (480px, 640px, 768px, 968px)</li>
+  </ul>
+  <h3>Deployment:</h3>
+  <ul>
+    <li>Application runs locally (backend on port 5000, frontend on port 3000)</li>
+    <li>MongoDB stores all data persistently</li>
+    <li>Both servers start with a single <code>npm run dev</code> command</li>
+  </ul>
+</div>
+
+<!-- Phase 6 -->
+<div class="phase">
+  <div class="phase-head">
+    <div class="phase-num">6</div>
+    <div class="phase-title">Documentation &amp; Maintenance</div>
+    <div class="phase-week">Week 4</div>
+  </div>
+  <h3>Activities:</h3>
+  <ul>
+    <li>Created this SDLC documentation</li>
+    <li>Built project presentation slides</li>
+    <li>Created in-app documentation pages</li>
+    <li>Built project portfolio &amp; developer portfolio pages</li>
+    <li>Identified future enhancements for next iteration</li>
+  </ul>
+  <h3>Future Enhancements (Maintenance Phase):</h3>
+  <table>
+    <tr><th>#</th><th>Enhancement</th><th>Priority</th></tr>
+    <tr><td>1</td><td>Email reminders for approaching deadlines</td><td>High</td></tr>
+    <tr><td>2</td><td>Drag-and-drop task reordering</td><td>Medium</td></tr>
+    <tr><td>3</td><td>Team workspaces for group projects</td><td>Medium</td></tr>
+    <tr><td>4</td><td>Google / GitHub OAuth login</td><td>Low</td></tr>
+    <tr><td>5</td><td>Dark mode toggle</td><td>Low</td></tr>
+    <tr><td>6</td><td>React Native mobile app</td><td>Future</td></tr>
+  </table>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════ SECTION 4: CURRENT UI ═══════════════ -->
+<h1 id="ui">Current UI of the System</h1>
+<p>Below are the current screens of TâcheFlow showing the professional design system with gradient colours, Inter font, and responsive layout.</p>
+
+<!-- UI 1: Login -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 1: Login Page</div>
+  <div class="ui-card-body">
+    <div class="ui-mockup">
+      <div class="m-auth">
+        <div class="m-auth-card">
+          <div class="m-auth-title">Welcome Back</div>
+          <div class="m-auth-sub">Sign in to TâcheFlow</div>
+          <div class="m-auth-field">
+            <label>Email Address</label>
+            <div class="m-auth-input">student@university.edu</div>
+          </div>
+          <div class="m-auth-field">
+            <label>Password</label>
+            <div class="m-auth-input">••••••••••</div>
+          </div>
+          <div class="m-auth-btn">Sign In</div>
+          <div style="text-align:center; font-size:0.6rem; color:#718096; margin-top:6px;">Don't have an account? <span style="color:#667eea; font-weight:700;">Register</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="ui-desc"><strong>Features shown:</strong> Gradient background, centred card layout, form inputs with labels, primary action button, navigation link to Register page. Fully responsive — adapts to mobile screens.</p>
+  </div>
+</div>
+
+<!-- UI 2: Register -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 2: Registration Page</div>
+  <div class="ui-card-body">
+    <div class="ui-mockup">
+      <div class="m-auth">
+        <div class="m-auth-card">
+          <div class="m-auth-title">Create Account</div>
+          <div class="m-auth-sub">Join TâcheFlow today</div>
+          <div class="m-auth-field">
+            <label>Full Name</label>
+            <div class="m-auth-input">John Lloyd Patosa</div>
+          </div>
+          <div class="m-auth-field">
+            <label>Email Address</label>
+            <div class="m-auth-input">johnlloydpatosa@yahoo.com</div>
+          </div>
+          <div class="m-auth-field">
+            <label>Password</label>
+            <div class="m-auth-input">••••••••••</div>
+          </div>
+          <div class="m-auth-btn">Create Account</div>
+          <div style="text-align:center; font-size:0.6rem; color:#718096; margin-top:6px;">Already have an account? <span style="color:#667eea; font-weight:700;">Sign In</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="ui-desc"><strong>Features shown:</strong> Three-field registration form (name, email, password), password hashed with bcrypt on submit, JWT token returned on success, auto-redirect to dashboard.</p>
+  </div>
+</div>
+
+<!-- UI 3: Dashboard -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 3: Dashboard (Main Screen)</div>
+  <div class="ui-card-body">
+    <div class="ui-mockup">
+      <div class="m-topbar">
+        <div class="m-dots"><span></span><span></span><span></span></div>
+        <div class="m-title">TâcheFlow · Dashboard</div>
+      </div>
+      <div style="padding:4px 0;">
+        <div style="color:white; font-weight:700; font-size:0.8rem; margin-bottom:2px;">Good morning, John Lloyd 👋</div>
+        <div style="color:#718096; font-size:0.65rem; margin-bottom:10px;">You have 3 tasks due this week</div>
+      </div>
+      <div class="m-stats">
+        <div class="m-stat"><span class="m-stat-num">12</span><span class="m-stat-lbl">Total</span></div>
+        <div class="m-stat"><span class="m-stat-num">4</span><span class="m-stat-lbl">Pending</span></div>
+        <div class="m-stat"><span class="m-stat-num">7</span><span class="m-stat-lbl">Done</span></div>
+        <div class="m-stat" style="background:rgba(245,101,101,0.2);"><span class="m-stat-num" style="color:#f56565;">1</span><span class="m-stat-lbl">Overdue</span></div>
+      </div>
+      <div style="display:flex; gap:4px; margin-bottom:8px;">
+        <span style="background:linear-gradient(135deg,#667eea,#764ba2); color:white; padding:3px 8px; border-radius:6px; font-size:0.6rem; font-weight:700;">All</span>
+        <span style="color:#a0aec0; padding:3px 8px; font-size:0.6rem;">Pending</span>
+        <span style="color:#a0aec0; padding:3px 8px; font-size:0.6rem;">Completed</span>
+        <span style="color:#a0aec0; padding:3px 8px; font-size:0.6rem;">Overdue</span>
+      </div>
+      <div class="m-task"><span class="m-dot m-dot-green"></span><span class="m-task-text" style="text-decoration:line-through; color:#4a5568;">Complete React Project</span><span class="m-badge m-badge-green">Done</span></div>
+      <div class="m-task"><span class="m-dot m-dot-orange"></span><span class="m-task-text">Study for Midterm Exam</span><span class="m-badge m-badge-orange">Today</span></div>
+      <div class="m-task"><span class="m-dot m-dot-red"></span><span class="m-task-text">Submit Lab Report #3</span><span class="m-badge m-badge-red">Overdue</span></div>
+      <div class="m-task"><span class="m-dot m-dot-blue"></span><span class="m-task-text">Review lecture notes Ch.7</span><span class="m-badge" style="background:rgba(102,126,234,0.2); color:#667eea;">Tomorrow</span></div>
+    </div>
+    <p class="ui-desc"><strong>Features shown:</strong> Welcome greeting, 4 stat cards (Total, Pending, Done, Overdue), filter pill buttons (All/Pending/Completed/Overdue), task grid with colour-coded due-date badges, status indicators, and strikethrough for completed tasks.</p>
+  </div>
+</div>
+
+<!-- UI 4: Task Form -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 4: Create/Edit Task Modal</div>
+  <div class="ui-card-body">
+    <div class="ui-mockup">
+      <div class="m-topbar">
+        <div class="m-dots"><span></span><span></span><span></span></div>
+        <div class="m-title">TâcheFlow · Dashboard</div>
+      </div>
+      <div class="m-form">
+        <div class="m-form-title">Create New Task</div>
+        <div class="m-field">
+          <label>Task Title</label>
+          <div class="m-input">Prepare presentation slides for CPE 401</div>
+        </div>
+        <div class="m-field">
+          <label>Description (optional)</label>
+          <div class="m-input" style="height:28px; color:#718096;">Cover chapters 4–6, include circuit diagrams...</div>
+        </div>
+        <div class="m-field">
+          <label>Due Date</label>
+          <div class="m-input">2025-06-15</div>
+        </div>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:10px;">
+          <span style="color:#718096; padding:4px 10px; border:1px solid #4a5568; border-radius:6px; font-size:0.68rem;">Cancel</span>
+          <span class="m-btn">Save Task</span>
+        </div>
+      </div>
+    </div>
+    <p class="ui-desc"><strong>Features shown:</strong> Modal overlay with backdrop blur, form fields (title, description, due date), cancel and save buttons. The same form is used for both creating new tasks and editing existing ones.</p>
+  </div>
+</div>
+
+<!-- UI 5: Navbar -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 5: Navigation Bar</div>
+  <div class="ui-card-body">
+    <div class="ui-mockup">
+      <div style="background:#ffffff; border-radius:8px; padding:10px 16px; display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="color:#667eea; font-size:0.9rem;">☑</span>
+          <span style="background:linear-gradient(135deg,#667eea,#764ba2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800; font-size:0.85rem;">TâcheFlow</span>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <span style="color:#667eea; font-size:0.68rem; font-weight:600; background:rgba(102,126,234,0.1); padding:3px 8px; border-radius:6px;">Dashboard</span>
+          <span style="color:#718096; font-size:0.68rem; font-weight:500;">Project</span>
+          <span style="color:#718096; font-size:0.68rem; font-weight:500;">About</span>
+          <span style="color:#718096; font-size:0.68rem; font-weight:500;">Docs</span>
+          <span style="color:#4a5568; font-size:0.65rem;">Welcome, John Lloyd!</span>
+          <span style="background:#f8fafc; border:1px solid #e2e8f0; padding:3px 8px; border-radius:6px; font-size:0.65rem; color:#4a5568; font-weight:600;">Logout</span>
+        </div>
+      </div>
+    </div>
+    <p class="ui-desc"><strong>Features shown:</strong> Sticky navbar with gradient brand logo, navigation links (Dashboard, Project, About, Docs), active page indicator, user welcome message, and logout button. Fully responsive — collapses on mobile.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- FOOTER -->
+<div style="text-align:center; padding:40px 0; color:#718096;">
+  <p style="font-size:0.9rem;">— End of Documentation —</p>
+  <p style="font-size:0.85rem; margin-top:12px;"><strong>Prepared by:</strong> John Lloyd Patosa</p>
+  <p style="font-size:0.85rem;">BS Computer Engineering • Lyceum of the Philippines University – Davao</p>
+  <p style="font-size:0.85rem;">June 2025</p>
+</div>
+
+</div>
+</body>
+</html>

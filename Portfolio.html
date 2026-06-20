@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Lloyd Patosa — Personal Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; color: #1a202c; line-height: 1.85; background: #fff; scroll-behavior: smooth; font-size: 16px; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 40px; }
+
+/* Navigation */
+.nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid #e2e8f0; z-index: 1000; padding: 16px 0; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 900px; margin: 0 auto; padding: 0 40px; }
+.nav-brand { font-size: 1.3rem; font-weight: 900; background: linear-gradient(135deg,#667eea,#764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+.nav-links a { padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: #718096; transition: all 0.2s; }
+.nav-links a:hover { color: #667eea; background: rgba(102,126,234,0.08); }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">John Lloyd Patosa</span>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+/* Hero */
+.hero { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); color: white; padding: 120px 0 80px; position: relative; }
+.hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='20' cy='20' r='10'/%3E%3C/g%3E%3C/svg%3E"); }
+.hero-inner { position: relative; z-index: 1; text-align: center; }
+.hero-photo { width: 200px; height: 200px; border-radius: 50%; overflow: hidden; margin: 0 auto 32px; border: 5px solid rgba(102,126,234,0.5); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.hero-name { font-size: 3.2rem; font-weight: 900; margin-bottom: 8px; letter-spacing: -0.02em; }
+.hero-role { font-size: 1.3rem; color: #667eea; font-weight: 700; margin-bottom: 6px; }
+.hero-sub { font-size: 1rem; color: #a0aec0; margin-bottom: 32px; }
+.hero-objective { font-size: 1.1rem; line-height: 1.9; max-width: 650px; margin: 0 auto 36px; opacity: 0.88; }
+.hero-contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 36px; }
+.hero-contact span { font-size: 0.92rem; opacity: 0.8; }
+.hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn { padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s; border: none; cursor: pointer; }
+.btn-primary { background: linear-gradient(135deg,#667eea,#764ba2); color: white; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(102,126,234,0.35); }
+.btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
+.btn-outline:hover { border-color: white; background: rgba(255,255,255,0.08); }
+</style>
+
+<!-- Hero Section -->
+<section class="hero" id="about">
+  <div class="container hero-inner">
+    <div class="hero-photo">
+      <img src="frontend/public/profile.jpg.jpg" alt="John Lloyd Patosa" onerror="this.parentElement.innerHTML='<div style=&quot;width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:white;font-size:3.5rem;font-weight:900&quot;>JLP</div>'">
+    </div>
+    <h1 class="hero-name">John Lloyd Patosa</h1>
+    <p class="hero-role">Computer Engineering Student</p>
+    <p class="hero-sub">Embedded Systems · Full-Stack Web Development · Electronics</p>
+    <p class="hero-objective">
+      I am a motivated Computer Engineering student at Lyceum of the Philippines University – Davao, 
+      skilled in embedded systems, electronics, and modern web development. I have hands-on experience 
+      from working at three companies in Geneva, Switzerland — covering broadcast systems, consumer 
+      electronics, and IoT automation. I am seeking opportunities to build innovative engineering solutions 
+      that bridge hardware and software.
+    </p>
+    <div class="hero-contact">
+      <span>📍 Indangan, Davao City</span>
+      <span>📞 +63 976 495 3989</span>
+      <span>✉️ johnlloydpatosa@yahoo.com</span>
+      <span>🔗 linkedin.com/in/johnlloyd</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">View My Projects</a>
+      <a href="#contact" class="btn btn-outline">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Sections */
+section.content { padding: 80px 0; }
+section.content.alt { background: #f8fafc; }
+.section-title { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; color: #1a202c; }
+.section-sub { font-size: 1.05rem; color: #718096; margin-bottom: 48px; line-height: 1.7; }
+
+/* Skills */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.skill-card { background: white; border-radius: 16px; padding: 32px; border: 1px solid #e2e8f0; transition: all 0.3s; }
+.skill-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(102,126,234,0.1); border-color: #667eea; }
+.skill-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 3px solid #667eea; }
+.skill-list { list-style: none; padding: 0; }
+.skill-list li { padding: 8px 0; font-size: 0.95rem; color: #4a5568; position: relative; padding-left: 20px; border-bottom: 1px solid #f1f5f9; }
+.skill-list li:last-child { border-bottom: none; }
+.skill-list li::before { content: '→'; position: absolute; left: 0; color: #667eea; font-weight: 700; }
+</style>
+
+<!-- Skills Section -->
+<section class="content alt" id="skills">
+  <div class="container">
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="section-sub">A combination of hardware expertise and modern software development capabilities, 
+    built through formal education in Geneva and self-directed learning.</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>⚡ Hardware & Embedded Systems</h3>
+        <ul class="skill-list">
+          <li>VHDL & FPGA Design</li>
+          <li>PCB Layout & Soldering</li>
+          <li>Arduino & ESP32 Development</li>
+          <li>NodeMCU / IoT Systems</li>
+          <li>Embedded C Programming</li>
+          <li>Circuit Debugging & Testing</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>💻 Software Development</h3>
+        <ul class="skill-list">
+          <li>React.js (Hooks, Router, Context)</li>
+          <li>Node.js & Express.js</li>
+          <li>MongoDB & Mongoose ODM</li>
+          <li>JavaScript (ES6+)</li>
+          <li>RESTful API Design</li>
+          <li>JWT Authentication & bcrypt</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>🛠️ Tools & Workflow</h3>
+        <ul class="skill-list">
+          <li>Git & GitHub (Version Control)</li>
+          <li>VS Code</li>
+          <li>Postman (API Testing)</li>
+          <li>Chrome DevTools</li>
+          <li>Broadcast Equipment Maintenance</li>
+          <li>Technical Troubleshooting</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>🌐 Languages & Soft Skills</h3>
+        <ul class="skill-list">
+          <li>English (Fluent)</li>
+          <li>Filipino (Native)</li>
+          <li>French (Basic / Conversational)</li>
+          <li>Independent Problem Solving</li>
+          <li>Attention to Detail</li>
+          <li>Teamwork & Communication</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Experience */
+.exp-card { background: white; border-radius: 16px; padding: 32px; border: 1px solid #e2e8f0; border-left: 5px solid #667eea; margin-bottom: 24px; transition: all 0.3s; }
+.exp-card:hover { transform: translateX(8px); box-shadow: 0 8px 28px rgba(102,126,234,0.1); }
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.exp-role { font-size: 1.2rem; font-weight: 800; color: #1a202c; }
+.exp-company { font-size: 1rem; color: #667eea; font-weight: 600; margin-bottom: 4px; }
+.exp-meta { font-size: 0.85rem; color: #a0aec0; background: #f8fafc; padding: 4px 12px; border-radius: 8px; white-space: nowrap; }
+.exp-desc { font-size: 1rem; color: #4a5568; margin-bottom: 14px; line-height: 1.8; }
+.exp-highlights { list-style: none; padding: 0; }
+.exp-highlights li { padding: 6px 0; font-size: 0.95rem; color: #4a5568; padding-left: 22px; position: relative; }
+.exp-highlights li::before { content: '✓'; position: absolute; left: 0; color: #48bb78; font-weight: 800; }
+</style>
+
+<!-- Experience Section -->
+<section class="content" id="experience">
+  <div class="container">
+    <h2 class="section-title">Work Experience</h2>
+    <p class="section-sub">Real-world industry roles across three companies in the Philippines and Switzerland, 
+    covering embedded systems, broadcast technology, and consumer electronics.</p>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Embedded Systems Intern</div>
+          <div class="exp-company">TechBridge Innovations</div>
+        </div>
+        <span class="exp-meta">2024 · Philippines</span>
+      </div>
+      <p class="exp-desc">Designed and deployed IoT automation systems using NodeMCU microcontrollers. 
+      Developed embedded C applications for real-world hardware control and sensor integration in smart home environments.</p>
+      <ul class="exp-highlights">
+        <li>Built IoT home automation systems using NodeMCU and Wi-Fi connectivity</li>
+        <li>Developed embedded C firmware for sensor reading and device control</li>
+        <li>Debugged and tested hardware prototypes on real physical devices</li>
+        <li>Integrated multiple sensors (temperature, motion, relay) into a unified system</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Broadcast Technician</div>
+          <div class="exp-company">Fréquence TV — Geneva, Switzerland</div>
+        </div>
+        <span class="exp-meta">2022 – 2023</span>
+      </div>
+      <p class="exp-desc">Maintained professional broadcast transmission equipment and provided live 
+      production support for scheduled and event-based television broadcasts in a fast-paced environment.</p>
+      <ul class="exp-highlights">
+        <li>Maintained broadcast transmission and signal distribution systems</li>
+        <li>Supported live production setups including camera, audio, and switching</li>
+        <li>Troubleshot equipment failures under time-critical broadcast deadlines</li>
+        <li>Learned professional signal routing and video encoding standards</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Electronics Sales Associate</div>
+          <div class="exp-company">Fust — Geneva, Switzerland</div>
+        </div>
+        <span class="exp-meta">2021 – 2022</span>
+      </div>
+      <p class="exp-desc">Assisted customers in selecting consumer electronics products, explaining 
+      complex technical specifications in accessible, non-technical language.</p>
+      <ul class="exp-highlights">
+        <li>Advised customers on electronics purchases across multiple product categories</li>
+        <li>Explained technical features and specifications clearly to non-technical users</li>
+        <li>Maintained up-to-date product knowledge across TVs, audio, computers, and appliances</li>
+        <li>Developed strong customer service and interpersonal communication skills</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Projects */
+.project-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; margin-bottom: 32px; transition: all 0.3s; }
+.project-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(102,126,234,0.12); border-color: #667eea; }
+.project-banner { padding: 40px 32px; color: white; }
+.project-banner h3 { font-size: 1.6rem; font-weight: 900; margin-bottom: 6px; }
+.project-banner p { font-size: 0.95rem; opacity: 0.85; }
+.project-body { padding: 32px; }
+.project-body > p { font-size: 1rem; color: #4a5568; line-height: 1.85; margin-bottom: 20px; }
+.project-features { margin-bottom: 20px; }
+.project-features h4 { font-size: 0.85rem; font-weight: 700; color: #1a202c; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+.project-features ul { list-style: none; padding: 0; columns: 2; }
+.project-features li { padding: 5px 0; font-size: 0.92rem; color: #4a5568; padding-left: 20px; position: relative; }
+.project-features li::before { content: '•'; position: absolute; left: 0; color: #667eea; font-weight: 900; font-size: 1.2rem; line-height: 1; }
+.project-tech { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-tag { background: rgba(102,126,234,0.1); color: #667eea; padding: 6px 14px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; }
+</style>
+
+<!-- Projects Section -->
+<section class="content alt" id="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Complete projects I've designed, built, and shipped — spanning web development, IoT, and hardware engineering.</p>
+
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <h3>TâcheFlow — Smart Task Management System</h3>
+        <p>Full-Stack MERN Web Application · 2025</p>
+      </div>
+      <div class="project-body">
+        <p>A production-quality task management web application designed for students. Built entirely from scratch 
+        using the MERN stack (MongoDB, Express.js, React.js, Node.js). Features a professional UI with gradient 
+        design system, real-time dashboard analytics, intelligent due-date color-coding, calendar view, gradebook, 
+        dark mode, and a submission system similar to Google Classroom.</p>
+        <div class="project-features">
+          <h4>Key Features</h4>
+          <ul>
+            <li>JWT authentication with bcrypt</li>
+            <li>Task CRUD with subjects & priority</li>
+            <li>Dashboard with live stat cards</li>
+            <li>Weekly activity chart</li>
+            <li>Due-date intelligence (5 urgency levels)</li>
+            <li>Submissions (text, link, file)</li>
+            <li>Turn In with late detection</li>
+            <li>Comments on tasks</li>
+            <li>File attachments on assignments</li>
+            <li>Calendar view page</li>
+            <li>Gradebook page</li>
+            <li>Profile page (edit info)</li>
+            <li>Search bar with live results</li>
+            <li>Notifications panel</li>
+            <li>Dark mode toggle</li>
+            <li>Pin/star important tasks</li>
+            <li>Progress per subject</li>
+            <li>Points system</li>
+            <li>Filter by status & subject</li>
+            <li>Fully responsive design</li>
+          </ul>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">React 18</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express.js</span>
+          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">Mongoose</span>
+          <span class="tech-tag">JWT</span>
+          <span class="tech-tag">bcrypt</span>
+          <span class="tech-tag">React Router v6</span>
+          <span class="tech-tag">Context API</span>
+          <span class="tech-tag">CSS3</span>
+          <span class="tech-tag">Lucide Icons</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg, #48bb78 0%, #2f855a 100%);">
+        <h3>IoT Home Automation System</h3>
+        <p>Embedded Systems · NodeMCU · 2024</p>
+      </div>
+      <div class="project-body">
+        <p>A smart home automation system built using NodeMCU (ESP8266) microcontrollers, enabling remote 
+        monitoring and control of household devices over Wi-Fi. Developed during my embedded systems internship 
+        at TechBridge Innovations.</p>
+        <div class="project-features">
+          <h4>Key Features</h4>
+          <ul>
+            <li>Remote device control via Wi-Fi</li>
+            <li>Real-time sensor monitoring</li>
+            <li>Temperature & motion detection</li>
+            <li>Relay-based appliance switching</li>
+            <li>Low-power design</li>
+            <li>Modular, expandable architecture</li>
+          </ul>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">NodeMCU</span>
+          <span class="tech-tag">ESP8266</span>
+          <span class="tech-tag">Embedded C</span>
+          <span class="tech-tag">Arduino IDE</span>
+          <span class="tech-tag">Wi-Fi</span>
+          <span class="tech-tag">IoT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-banner" style="background: linear-gradient(135deg, #f6ad55 0%, #c05621 100%);">
+        <h3>Vendo Storage Machine</h3>
+        <p>Co-Founded · Hardware Engineering · 2024</p>
+      </div>
+      <div class="project-body">
+        <p>Co-founded and contributed to the design and development of an automated vending storage system. 
+        Combined PCB design, embedded control logic, mechanical engineering, and a working physical prototype 
+        built from the ground up.</p>
+        <div class="project-features">
+          <h4>Key Features</h4>
+          <ul>
+            <li>Automated dispensing logic</li>
+            <li>Custom PCB design & fabrication</li>
+            <li>Physical prototype built</li>
+            <li>Motor control circuitry</li>
+            <li>Coin detection mechanism</li>
+            <li>End-to-end engineering</li>
+          </ul>
+        </div>
+        <div class="project-tech">
+          <span class="tech-tag">Arduino</span>
+          <span class="tech-tag">PCB Design</span>
+          <span class="tech-tag">Embedded C</span>
+          <span class="tech-tag">Soldering</span>
+          <span class="tech-tag">Mechanical Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Education */
+.edu-card { background: white; border-radius: 16px; padding: 32px; border: 1px solid #e2e8f0; margin-bottom: 24px; transition: all 0.3s; }
+.edu-card:hover { border-color: #667eea; box-shadow: 0 8px 28px rgba(102,126,234,0.08); }
+.edu-card h3 { font-size: 1.2rem; font-weight: 800; color: #1a202c; margin-bottom: 4px; }
+.edu-school { font-size: 1rem; color: #667eea; font-weight: 600; margin-bottom: 4px; }
+.edu-year { font-size: 0.85rem; color: #a0aec0; margin-bottom: 12px; }
+.edu-card > p { font-size: 1rem; color: #4a5568; line-height: 1.8; }
+
+/* Certificates */
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.cert-card { background: white; border-radius: 16px; padding: 28px; border: 1px solid #e2e8f0; transition: all 0.3s; }
+.cert-card:hover { transform: translateY(-4px); border-color: #667eea; box-shadow: 0 8px 24px rgba(102,126,234,0.08); }
+.cert-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: #1a202c; }
+.cert-card p { font-size: 0.92rem; color: #718096; line-height: 1.7; }
+
+/* Contact */
+.contact-section { background: linear-gradient(135deg,#1a202c,#2d3748); color: white; padding: 80px 0; text-align: center; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 700px; margin: 0 auto 40px; }
+.contact-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 24px; transition: all 0.3s; }
+.contact-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+.contact-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+.contact-card p { font-size: 0.9rem; color: #a0aec0; }
+
+/* Footer */
+.footer { background: #1a202c; border-top: 1px solid #2d3748; padding: 24px 0; text-align: center; color: #718096; font-size: 0.82rem; }
+
+/* Responsive */
+@media (max-width: 640px) { .container { padding: 0 20px; } .hero-name { font-size: 2.2rem; } .project-features ul { columns: 1; } .nav-links a { padding: 4px 8px; font-size: 0.75rem; } }
+@media print { .nav { display: none; } .hero { min-height: auto; padding: 40px 0; } section.content { padding: 40px 0; } }
+</style>
+
+<!-- Education Section -->
+<section class="content" id="education">
+  <div class="container">
+    <h2 class="section-title">Education</h2>
+    <p class="section-sub">Academic foundations in engineering from both the Philippines and Switzerland.</p>
+
+    <div class="edu-card">
+      <h3>Bachelor of Science in Computer Engineering</h3>
+      <p class="edu-school">Lyceum of the Philippines University – Davao</p>
+      <p class="edu-year">2023 – 2027 (Currently Enrolled)</p>
+      <p>Pursuing a Bachelor of Science in Computer Engineering with focus on embedded systems, 
+      FPGA design, digital circuits, and software development. TâcheFlow is a capstone-level project 
+      demonstrating full-stack web development proficiency. Active in hands-on laboratory work 
+      involving microcontrollers, networking, and system design.</p>
+    </div>
+
+    <div class="edu-card">
+      <h3>Electronics Studies (CFC)</h3>
+      <p class="edu-school">CFPT École d'Électronique — Geneva, Switzerland</p>
+      <p class="edu-year">2021 – 2023</p>
+      <p>Formal electronics education at one of Switzerland's leading technical schools. Covered 
+      circuit theory, PCB design and fabrication, soldering techniques, broadcast systems, and 
+      practical hardware troubleshooting. Simultaneously gained real industry experience through 
+      work placements at three companies in the Geneva area.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Certificates Section -->
+<section class="content alt" id="certificates">
+  <div class="container">
+    <h2 class="section-title">Certificates & Training</h2>
+    <p class="section-sub">Professional certifications earned through formal training programs.</p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <h4>🔧 Embedded Systems Training Certificate</h4>
+        <p>Completed training in microcontroller programming and IoT systems. Gained practical 
+        experience building real-world embedded applications with debugging and testing methodologies.</p>
+      </div>
+      <div class="cert-card">
+        <h4>🔌 PCB Design & Electronics Workshop Certificate</h4>
+        <p>Hands-on training in PCB layout design, component soldering, and circuit design. 
+        Developed skills in creating efficient, reliable electronic circuits from schematic to fabrication.</p>
+      </div>
+      <div class="cert-card">
+        <h4>📟 Arduino & ESP32 Development Certificate</h4>
+        <p>Developed multiple embedded projects using Arduino and ESP32 platforms. Strengthened 
+        knowledge in IoT development, sensor integration, and hardware-software communication.</p>
+      </div>
+      <div class="cert-card">
+        <h4>📡 Broadcast Systems Technical Certificate</h4>
+        <p>Training in professional broadcast equipment maintenance, signal routing, and live 
+        production support. Learned proper handling and troubleshooting of broadcast-grade systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <h2 class="section-title" style="color:white;">Get in Touch</h2>
+    <p class="section-sub" style="color:#a0aec0;">Whether it's an engineering role, freelance project, or just a conversation about tech — I'd love to hear from you.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h4>📞 Phone</h4>
+        <p>+63 976 495 3989</p>
+      </div>
+      <div class="contact-card">
+        <h4>✉️ Email</h4>
+        <p>johnlloydpatosa@yahoo.com</p>
+      </div>
+      <div class="contact-card">
+        <h4>🔗 LinkedIn</h4>
+        <p>linkedin.com/in/johnlloyd</p>
+      </div>
+      <div class="contact-card">
+        <h4>📍 Location</h4>
+        <p>Indangan, Davao City, Philippines</p>
+      </div>
+    </div>
+    <p style="opacity:0.5; font-size:0.9rem;">Hobbies: 🏀 Basketball · 🎮 Computer Games · 📚 Reading Books · 🎵 Music · 💪 Physical Fitness</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  <p>© 2025 John Lloyd Patosa · BS Computer Engineering · Lyceum of the Philippines University – Davao</p>
+</div>
+
+</body>
+</html>
