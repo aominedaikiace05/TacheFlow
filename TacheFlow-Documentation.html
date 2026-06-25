@@ -303,17 +303,30 @@ hr.divider { border: none; border-top: 2px solid #e2e8f0; margin: 48px 0; }
 <h2>Key Features</h2>
 <table>
   <tr><th>#</th><th>Feature</th><th>Description</th><th>Status</th></tr>
-  <tr><td>1</td><td>User Registration</td><td>Create account with name, email, and password (hashed)</td><td class="done">✅ Done</td></tr>
-  <tr><td>2</td><td>User Login</td><td>Authenticate with JWT token (7-day expiry)</td><td class="done">✅ Done</td></tr>
-  <tr><td>3</td><td>Create Task</td><td>Add task with title, description, due date</td><td class="done">✅ Done</td></tr>
-  <tr><td>4</td><td>Edit Task</td><td>Update any field of an existing task</td><td class="done">✅ Done</td></tr>
-  <tr><td>5</td><td>Delete Task</td><td>Remove task permanently</td><td class="done">✅ Done</td></tr>
-  <tr><td>6</td><td>Toggle Status</td><td>One-click switch between pending ↔ completed</td><td class="done">✅ Done</td></tr>
-  <tr><td>7</td><td>Task Filtering</td><td>Filter by All / Pending / Completed / Overdue</td><td class="done">✅ Done</td></tr>
-  <tr><td>8</td><td>Dashboard Analytics</td><td>Real-time stat cards (total, pending, completed)</td><td class="done">✅ Done</td></tr>
-  <tr><td>9</td><td>Due-Date Intelligence</td><td>Colour-coded urgency badges</td><td class="done">✅ Done</td></tr>
-  <tr><td>10</td><td>Responsive Design</td><td>Works on mobile, tablet, and desktop</td><td class="done">✅ Done</td></tr>
-  <tr><td>11</td><td>Professional UI</td><td>Gradient design system, Inter font, animations</td><td class="done">✅ Done</td></tr>
+  <tr><td>1</td><td>User Registration & Login</td><td>JWT authentication with bcrypt password hashing</td><td class="done">✅ Done</td></tr>
+  <tr><td>2</td><td>Create / Edit / Delete Tasks</td><td>Full CRUD with title, description, due date, subject, priority, points</td><td class="done">✅ Done</td></tr>
+  <tr><td>3</td><td>Subjects / Categories</td><td>Group tasks by class (CPE 401, Math 201, etc.)</td><td class="done">✅ Done</td></tr>
+  <tr><td>4</td><td>Priority Levels</td><td>High (red), Medium (orange), Low (green) with colour bar on cards</td><td class="done">✅ Done</td></tr>
+  <tr><td>5</td><td>Points System</td><td>Assign points to tasks like a graded assignment</td><td class="done">✅ Done</td></tr>
+  <tr><td>6</td><td>Due-Date Intelligence</td><td>Colour-coded badges: Overdue, Today, Tomorrow, Soon, Normal</td><td class="done">✅ Done</td></tr>
+  <tr><td>7</td><td>Dashboard with Stats</td><td>4 live stat cards: Total, Pending, Completed, Overdue</td><td class="done">✅ Done</td></tr>
+  <tr><td>8</td><td>Progress per Subject</td><td>Progress bars showing completion % per subject</td><td class="done">✅ Done</td></tr>
+  <tr><td>9</td><td>Weekly Activity Chart</td><td>Bar chart showing tasks created/completed per day this week</td><td class="done">✅ Done</td></tr>
+  <tr><td>10</td><td>Due Soon Banner</td><td>Orange alert showing tasks due today at top of dashboard</td><td class="done">✅ Done</td></tr>
+  <tr><td>11</td><td>Task Filtering</td><td>Filter by status (All/Pending/Completed/Overdue) and by subject</td><td class="done">✅ Done</td></tr>
+  <tr><td>12</td><td>Pin / Star Tasks</td><td>Pin important tasks so they always appear first</td><td class="done">✅ Done</td></tr>
+  <tr><td>13</td><td>Task Detail Page</td><td>Click a task to open full detail with submissions, comments, attachments</td><td class="done">✅ Done</td></tr>
+  <tr><td>14</td><td>Submissions</td><td>Submit answers as text, link (URL), or file (Google Drive link)</td><td class="done">✅ Done</td></tr>
+  <tr><td>15</td><td>Attachments on Tasks</td><td>Attach reference files/PDFs when creating assignments</td><td class="done">✅ Done</td></tr>
+  <tr><td>16</td><td>Turn In / Late Indicator</td><td>Explicit "Turn In" button with late detection if past due date</td><td class="done">✅ Done</td></tr>
+  <tr><td>17</td><td>Comments</td><td>Add private notes/comments on any task</td><td class="done">✅ Done</td></tr>
+  <tr><td>18</td><td>Calendar Page</td><td>Monthly calendar view showing tasks on their due dates</td><td class="done">✅ Done</td></tr>
+  <tr><td>19</td><td>Grades Page</td><td>Gradebook showing points earned vs possible per subject with letter grades</td><td class="done">✅ Done</td></tr>
+  <tr><td>20</td><td>Profile Page</td><td>Edit name, email, change password, view stats</td><td class="done">✅ Done</td></tr>
+  <tr><td>21</td><td>Search Bar</td><td>Live search by task title or subject from the navbar</td><td class="done">✅ Done</td></tr>
+  <tr><td>22</td><td>Notifications Panel</td><td>Bell icon showing overdue, due today, due tomorrow alerts</td><td class="done">✅ Done</td></tr>
+  <tr><td>23</td><td>Dark Mode</td><td>Toggle between light and dark theme (preference saved)</td><td class="done">✅ Done</td></tr>
+  <tr><td>24</td><td>Responsive Design</td><td>Works on mobile, tablet, and desktop with 4 breakpoints</td><td class="done">✅ Done</td></tr>
 </table>
 
 <h2>Security Features</h2>
@@ -531,31 +544,13 @@ Task Collection:
 
 <!-- ═══════════════ SECTION 4: CURRENT UI ═══════════════ -->
 <h1 id="ui">Current UI of the System</h1>
-<p>Below are the current screens of TâcheFlow showing the professional design system with gradient colours, Inter font, and responsive layout.</p>
+<p>Below are the current screens of TâcheFlow showing all implemented features across 8 main pages.</p>
 
 <!-- UI 1: Login -->
 <div class="ui-card">
   <div class="ui-card-header">Screen 1: Login Page</div>
   <div class="ui-card-body">
-    <div class="ui-mockup">
-      <div class="m-auth">
-        <div class="m-auth-card">
-          <div class="m-auth-title">Welcome Back</div>
-          <div class="m-auth-sub">Sign in to TâcheFlow</div>
-          <div class="m-auth-field">
-            <label>Email Address</label>
-            <div class="m-auth-input">student@university.edu</div>
-          </div>
-          <div class="m-auth-field">
-            <label>Password</label>
-            <div class="m-auth-input">••••••••••</div>
-          </div>
-          <div class="m-auth-btn">Sign In</div>
-          <div style="text-align:center; font-size:0.6rem; color:#718096; margin-top:6px;">Don't have an account? <span style="color:#667eea; font-weight:700;">Register</span></div>
-        </div>
-      </div>
-    </div>
-    <p class="ui-desc"><strong>Features shown:</strong> Gradient background, centred card layout, form inputs with labels, primary action button, navigation link to Register page. Fully responsive — adapts to mobile screens.</p>
+    <p class="ui-desc"><strong>Features:</strong> Gradient background with dot pattern, centred card layout, email & password fields with validation, "Sign In" primary button, link to Register page. JWT token stored on success.</p>
   </div>
 </div>
 
@@ -563,29 +558,7 @@ Task Collection:
 <div class="ui-card">
   <div class="ui-card-header">Screen 2: Registration Page</div>
   <div class="ui-card-body">
-    <div class="ui-mockup">
-      <div class="m-auth">
-        <div class="m-auth-card">
-          <div class="m-auth-title">Create Account</div>
-          <div class="m-auth-sub">Join TâcheFlow today</div>
-          <div class="m-auth-field">
-            <label>Full Name</label>
-            <div class="m-auth-input">John Lloyd Patosa</div>
-          </div>
-          <div class="m-auth-field">
-            <label>Email Address</label>
-            <div class="m-auth-input">johnlloydpatosa@yahoo.com</div>
-          </div>
-          <div class="m-auth-field">
-            <label>Password</label>
-            <div class="m-auth-input">••••••••••</div>
-          </div>
-          <div class="m-auth-btn">Create Account</div>
-          <div style="text-align:center; font-size:0.6rem; color:#718096; margin-top:6px;">Already have an account? <span style="color:#667eea; font-weight:700;">Sign In</span></div>
-        </div>
-      </div>
-    </div>
-    <p class="ui-desc"><strong>Features shown:</strong> Three-field registration form (name, email, password), password hashed with bcrypt on submit, JWT token returned on success, auto-redirect to dashboard.</p>
+    <p class="ui-desc"><strong>Features:</strong> Name, email, password, confirm password fields. Validates minimum 6 characters. bcrypt hashes password. Auto-login after registration. Redirects to dashboard.</p>
   </div>
 </div>
 
@@ -593,90 +566,55 @@ Task Collection:
 <div class="ui-card">
   <div class="ui-card-header">Screen 3: Dashboard (Main Screen)</div>
   <div class="ui-card-body">
-    <div class="ui-mockup">
-      <div class="m-topbar">
-        <div class="m-dots"><span></span><span></span><span></span></div>
-        <div class="m-title">TâcheFlow · Dashboard</div>
-      </div>
-      <div style="padding:4px 0;">
-        <div style="color:white; font-weight:700; font-size:0.8rem; margin-bottom:2px;">Good morning, John Lloyd 👋</div>
-        <div style="color:#718096; font-size:0.65rem; margin-bottom:10px;">You have 3 tasks due this week</div>
-      </div>
-      <div class="m-stats">
-        <div class="m-stat"><span class="m-stat-num">12</span><span class="m-stat-lbl">Total</span></div>
-        <div class="m-stat"><span class="m-stat-num">4</span><span class="m-stat-lbl">Pending</span></div>
-        <div class="m-stat"><span class="m-stat-num">7</span><span class="m-stat-lbl">Done</span></div>
-        <div class="m-stat" style="background:rgba(245,101,101,0.2);"><span class="m-stat-num" style="color:#f56565;">1</span><span class="m-stat-lbl">Overdue</span></div>
-      </div>
-      <div style="display:flex; gap:4px; margin-bottom:8px;">
-        <span style="background:linear-gradient(135deg,#667eea,#764ba2); color:white; padding:3px 8px; border-radius:6px; font-size:0.6rem; font-weight:700;">All</span>
-        <span style="color:#a0aec0; padding:3px 8px; font-size:0.6rem;">Pending</span>
-        <span style="color:#a0aec0; padding:3px 8px; font-size:0.6rem;">Completed</span>
-        <span style="color:#a0aec0; padding:3px 8px; font-size:0.6rem;">Overdue</span>
-      </div>
-      <div class="m-task"><span class="m-dot m-dot-green"></span><span class="m-task-text" style="text-decoration:line-through; color:#4a5568;">Complete React Project</span><span class="m-badge m-badge-green">Done</span></div>
-      <div class="m-task"><span class="m-dot m-dot-orange"></span><span class="m-task-text">Study for Midterm Exam</span><span class="m-badge m-badge-orange">Today</span></div>
-      <div class="m-task"><span class="m-dot m-dot-red"></span><span class="m-task-text">Submit Lab Report #3</span><span class="m-badge m-badge-red">Overdue</span></div>
-      <div class="m-task"><span class="m-dot m-dot-blue"></span><span class="m-task-text">Review lecture notes Ch.7</span><span class="m-badge" style="background:rgba(102,126,234,0.2); color:#667eea;">Tomorrow</span></div>
-    </div>
-    <p class="ui-desc"><strong>Features shown:</strong> Welcome greeting, 4 stat cards (Total, Pending, Done, Overdue), filter pill buttons (All/Pending/Completed/Overdue), task grid with colour-coded due-date badges, status indicators, and strikethrough for completed tasks.</p>
+    <p class="ui-desc"><strong>Features:</strong> Welcome greeting with overdue count, 4 stat cards (Total/Pending/Completed/Overdue), Weekly Activity Chart (created vs completed per day), Progress per Subject (bars), Due Soon Banner (tasks due today), Filter by status & subject, Task grid with priority bars, subject tags, points, pin icon, Open button. "Add Task" button opens creation modal.</p>
   </div>
 </div>
 
 <!-- UI 4: Task Form -->
 <div class="ui-card">
-  <div class="ui-card-header">Screen 4: Create/Edit Task Modal</div>
+  <div class="ui-card-header">Screen 4: Create / Edit Task Modal</div>
   <div class="ui-card-body">
-    <div class="ui-mockup">
-      <div class="m-topbar">
-        <div class="m-dots"><span></span><span></span><span></span></div>
-        <div class="m-title">TâcheFlow · Dashboard</div>
-      </div>
-      <div class="m-form">
-        <div class="m-form-title">Create New Task</div>
-        <div class="m-field">
-          <label>Task Title</label>
-          <div class="m-input">Prepare presentation slides for CPE 401</div>
-        </div>
-        <div class="m-field">
-          <label>Description (optional)</label>
-          <div class="m-input" style="height:28px; color:#718096;">Cover chapters 4–6, include circuit diagrams...</div>
-        </div>
-        <div class="m-field">
-          <label>Due Date</label>
-          <div class="m-input">2025-06-15</div>
-        </div>
-        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:10px;">
-          <span style="color:#718096; padding:4px 10px; border:1px solid #4a5568; border-radius:6px; font-size:0.68rem;">Cancel</span>
-          <span class="m-btn">Save Task</span>
-        </div>
-      </div>
-    </div>
-    <p class="ui-desc"><strong>Features shown:</strong> Modal overlay with backdrop blur, form fields (title, description, due date), cancel and save buttons. The same form is used for both creating new tasks and editing existing ones.</p>
+    <p class="ui-desc"><strong>Features:</strong> Title, Subject dropdown (preset list + custom), Priority selector (High/Medium/Low), Description/Instructions textarea, Due Date picker, Points field, Attachments section (add file name + Google Drive link). Cancel/Save buttons. Same form for create and edit.</p>
   </div>
 </div>
 
-<!-- UI 5: Navbar -->
+<!-- UI 5: Task Detail -->
 <div class="ui-card">
-  <div class="ui-card-header">Screen 5: Navigation Bar</div>
+  <div class="ui-card-header">Screen 5: Task Detail Page</div>
   <div class="ui-card-body">
-    <div class="ui-mockup">
-      <div style="background:#ffffff; border-radius:8px; padding:10px 16px; display:flex; align-items:center; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span style="color:#667eea; font-size:0.9rem;">☑</span>
-          <span style="background:linear-gradient(135deg,#667eea,#764ba2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800; font-size:0.85rem;">TâcheFlow</span>
-        </div>
-        <div style="display:flex; gap:12px; align-items:center;">
-          <span style="color:#667eea; font-size:0.68rem; font-weight:600; background:rgba(102,126,234,0.1); padding:3px 8px; border-radius:6px;">Dashboard</span>
-          <span style="color:#718096; font-size:0.68rem; font-weight:500;">Project</span>
-          <span style="color:#718096; font-size:0.68rem; font-weight:500;">About</span>
-          <span style="color:#718096; font-size:0.68rem; font-weight:500;">Docs</span>
-          <span style="color:#4a5568; font-size:0.65rem;">Welcome, John Lloyd!</span>
-          <span style="background:#f8fafc; border:1px solid #e2e8f0; padding:3px 8px; border-radius:6px; font-size:0.65rem; color:#4a5568; font-weight:600;">Logout</span>
-        </div>
-      </div>
-    </div>
-    <p class="ui-desc"><strong>Features shown:</strong> Sticky navbar with gradient brand logo, navigation links (Dashboard, Project, About, Docs), active page indicator, user welcome message, and logout button. Fully responsive — collapses on mobile.</p>
+    <p class="ui-desc"><strong>Features:</strong> Full task view with title, status toggle, due date badge, subject tag, points, description/instructions. Attachments section (clickable links to PDFs/files). "Turn In" button with late detection. Submissions area (type answer, submit link, or submit file). Comments section with add/delete. Back to Dashboard button.</p>
+  </div>
+</div>
+
+<!-- UI 6: Calendar -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 6: Calendar Page</div>
+  <div class="ui-card-body">
+    <p class="ui-desc"><strong>Features:</strong> Monthly calendar grid with prev/next month navigation. Tasks shown on their due dates with colour-coded dots (green = completed, orange = pending). Click a task to open its detail page. Today highlighted.</p>
+  </div>
+</div>
+
+<!-- UI 7: Grades -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 7: Grades Page</div>
+  <div class="ui-card-body">
+    <p class="ui-desc"><strong>Features:</strong> Overall grade circle (letter grade + percentage), grade calculated from points earned vs points possible. Per-subject grade cards with progress bars, task counts, and letter grades (A/B/C/D/F).</p>
+  </div>
+</div>
+
+<!-- UI 8: Profile -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 8: Profile Page</div>
+  <div class="ui-card-body">
+    <p class="ui-desc"><strong>Features:</strong> User avatar with initial, name, email display. Stats (tasks completed, total tasks, points earned). Edit Profile form (change name/email). Change Password form (current + new password). Save buttons.</p>
+  </div>
+</div>
+
+<!-- UI 9: Navbar -->
+<div class="ui-card">
+  <div class="ui-card-header">Screen 9: Navigation Bar</div>
+  <div class="ui-card-body">
+    <p class="ui-desc"><strong>Features:</strong> Sticky navbar with TâcheFlow brand logo, navigation links (Dashboard, Calendar, Grades, Profile), Search icon (opens live search dropdown), Notifications bell (shows overdue/due today/tomorrow alerts with badge count), Dark Mode toggle (moon/sun icon), user greeting, Logout button. Fully responsive — collapses on mobile.</p>
   </div>
 </div>
 
