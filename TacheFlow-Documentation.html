@@ -544,29 +544,32 @@ Task Collection:
 
 <!-- ═══════════════ SECTION 4: CURRENT UI ═══════════════ -->
 <h1 id="ui">Current UI of the System</h1>
-<p>Below are the current screens of TâcheFlow showing all implemented features across 8 main pages.</p>
+<p>Below are the actual screenshots of TâcheFlow showing all implemented features.</p>
 
 <!-- UI 1: Login -->
 <div class="ui-card">
   <div class="ui-card-header">Screen 1: Login Page</div>
   <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> Gradient background with dot pattern, centred card layout, email & password fields with validation, "Sign In" primary button, link to Register page. JWT token stored on success.</p>
+    <img src="screenshot-login.png" alt="Login Page" style="width:100%; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:12px;">
+    <p class="ui-desc"><strong>Features:</strong> Gradient background, centred card layout, email & password fields, JWT authentication, link to Register page.</p>
   </div>
 </div>
 
-<!-- UI 2: Register -->
+<!-- UI 2: Dashboard -->
 <div class="ui-card">
-  <div class="ui-card-header">Screen 2: Registration Page</div>
+  <div class="ui-card-header">Screen 2: Dashboard (Main Screen)</div>
   <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> Name, email, password, confirm password fields. Validates minimum 6 characters. bcrypt hashes password. Auto-login after registration. Redirects to dashboard.</p>
+    <img src="screenshot-dashboard.png" alt="Dashboard" style="width:100%; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:12px;">
+    <p class="ui-desc"><strong>Features:</strong> 4 stat cards (Total/Pending/Completed/Overdue), Weekly Activity Chart, Progress per Subject, Due Soon Banner, Filter by status & subject, Task grid with priority bars, subject tags, points, pin icon, and Open button.</p>
   </div>
 </div>
 
-<!-- UI 3: Dashboard -->
+<!-- UI 3: Navbar -->
 <div class="ui-card">
-  <div class="ui-card-header">Screen 3: Dashboard (Main Screen)</div>
+  <div class="ui-card-header">Screen 3: Navigation Bar</div>
   <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> Welcome greeting with overdue count, 4 stat cards (Total/Pending/Completed/Overdue), Weekly Activity Chart (created vs completed per day), Progress per Subject (bars), Due Soon Banner (tasks due today), Filter by status & subject, Task grid with priority bars, subject tags, points, pin icon, Open button. "Add Task" button opens creation modal.</p>
+    <img src="screenshot-navbar.png" alt="Navbar" style="width:100%; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:12px;">
+    <p class="ui-desc"><strong>Features:</strong> TâcheFlow brand, nav links (Dashboard, Calendar, Grades, Profile), Search icon, Notifications bell with badge, Dark Mode toggle, user greeting, Logout button.</p>
   </div>
 </div>
 
@@ -574,7 +577,8 @@ Task Collection:
 <div class="ui-card">
   <div class="ui-card-header">Screen 4: Create / Edit Task Modal</div>
   <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> Title, Subject dropdown (preset list + custom), Priority selector (High/Medium/Low), Description/Instructions textarea, Due Date picker, Points field, Attachments section (add file name + Google Drive link). Cancel/Save buttons. Same form for create and edit.</p>
+    <img src="screenshot-taskform.png" alt="Task Form" style="width:100%; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:12px;">
+    <p class="ui-desc"><strong>Features:</strong> Title, Subject dropdown, Priority selector (High/Medium/Low), Description textarea, Due Date, Points, Attachments (add file name + link). Cancel/Save buttons.</p>
   </div>
 </div>
 
@@ -582,7 +586,8 @@ Task Collection:
 <div class="ui-card">
   <div class="ui-card-header">Screen 5: Task Detail Page</div>
   <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> Full task view with title, status toggle, due date badge, subject tag, points, description/instructions. Attachments section (clickable links to PDFs/files). "Turn In" button with late detection. Submissions area (type answer, submit link, or submit file). Comments section with add/delete. Back to Dashboard button.</p>
+    <img src="screenshot-taskdetail.png" alt="Task Detail" style="width:100%; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:12px;">
+    <p class="ui-desc"><strong>Features:</strong> Full task view with status toggle, due date badge, subject tag, points, attachments, "Turn In" button with late detection, Submissions (text/link/file), Comments section.</p>
   </div>
 </div>
 
@@ -590,7 +595,8 @@ Task Collection:
 <div class="ui-card">
   <div class="ui-card-header">Screen 6: Calendar Page</div>
   <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> Monthly calendar grid with prev/next month navigation. Tasks shown on their due dates with colour-coded dots (green = completed, orange = pending). Click a task to open its detail page. Today highlighted.</p>
+    <img src="screenshot-calendar.png" alt="Calendar" style="width:100%; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:12px;">
+    <p class="ui-desc"><strong>Features:</strong> Monthly calendar grid, prev/next month navigation, tasks shown on due dates with colour-coded dots, click to open task detail, today highlighted.</p>
   </div>
 </div>
 
@@ -598,7 +604,8 @@ Task Collection:
 <div class="ui-card">
   <div class="ui-card-header">Screen 7: Grades Page</div>
   <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> Overall grade circle (letter grade + percentage), grade calculated from points earned vs points possible. Per-subject grade cards with progress bars, task counts, and letter grades (A/B/C/D/F).</p>
+    <img src="screenshot-grades.png" alt="Grades" style="width:100%; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:12px;">
+    <p class="ui-desc"><strong>Features:</strong> Overall grade circle (letter + percentage), per-subject grade cards with progress bars, points earned vs possible, letter grades (A/B/C/D/F).</p>
   </div>
 </div>
 
@@ -606,15 +613,8 @@ Task Collection:
 <div class="ui-card">
   <div class="ui-card-header">Screen 8: Profile Page</div>
   <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> User avatar with initial, name, email display. Stats (tasks completed, total tasks, points earned). Edit Profile form (change name/email). Change Password form (current + new password). Save buttons.</p>
-  </div>
-</div>
-
-<!-- UI 9: Navbar -->
-<div class="ui-card">
-  <div class="ui-card-header">Screen 9: Navigation Bar</div>
-  <div class="ui-card-body">
-    <p class="ui-desc"><strong>Features:</strong> Sticky navbar with TâcheFlow brand logo, navigation links (Dashboard, Calendar, Grades, Profile), Search icon (opens live search dropdown), Notifications bell (shows overdue/due today/tomorrow alerts with badge count), Dark Mode toggle (moon/sun icon), user greeting, Logout button. Fully responsive — collapses on mobile.</p>
+    <img src="screenshot-profile.png" alt="Profile" style="width:100%; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:12px;">
+    <p class="ui-desc"><strong>Features:</strong> User avatar, name & email display, stats (tasks completed, total, points earned), Edit Profile form, Change Password form.</p>
   </div>
 </div>
 
