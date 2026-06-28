@@ -76,12 +76,18 @@
 
 @media (max-width: 968px) {
   .navbar-container { flex-wrap: wrap; gap: 10px; }
-  .navbar-nav { overflow-x: auto; flex-wrap: nowrap; }
+  .navbar-nav { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .navbar-nav::-webkit-scrollbar { display: none; }
+  .nav-link { white-space: nowrap; }
   .nav-link span { display: none; }
   .user-welcome { display: none; }
 }
 
 @media (max-width: 640px) {
-  .navbar-nav { gap: 0; }
+  .navbar-menu { width: 100%; justify-content: space-between; }
+  .navbar-nav { gap: 0; flex: 1; justify-content: center; }
   .nav-link { padding: 6px 8px; font-size: 0.75rem; }
+  .navbar-btn { padding: 5px 10px; font-size: 0.75rem; }
+  .search-dropdown { width: 260px; right: -40px; }
+  .notif-dropdown { width: 250px; right: -20px; }
 }
