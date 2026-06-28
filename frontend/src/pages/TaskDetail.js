@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import toast from 'react-hot-toast';
@@ -15,7 +15,8 @@ import {
   Trash2,
   ExternalLink,
   File,
-  Paperclip
+  Paperclip,
+  Upload
 } from 'lucide-react';
 import './TaskDetail.css';
 
@@ -28,6 +29,7 @@ const TaskDetail = () => {
   const [submissionContent, setSubmissionContent] = useState('');
   const [fileName, setFileName] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const submissionFileRef = useRef(null);
 
   useEffect(() => {
     fetchTask();
@@ -381,23 +383,45 @@ const TaskDetail = () => {
               {submissionType === 'file' && (
                 <div className="file-submission">
                   <input
-                    type="text"
-                    value={fileName}
-                    onChange={(e) => setFileName(e.target.value)}
-                    placeholder="File name (e.g. Assignment_1.pdf)"
-                    className="form-input"
-                    style={{ marginBottom: '12px' }}
+                    type="file"
+                    ref={submissionFileRef}
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        setFileName(file.name);
+                        setSubmissionContent(URL.createObjectURL(file));
+                      }
+                    }}
+                    accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.xlsx,.pptx,.zip"
+                    style={{ display: 'none' }}
                   />
+                  <button
+                    type="button"
+                    className="btn btn-secondary file-upload-btn"
+                    onClick={() => submissionFileRef.current && submissionFileRef.current.click()}
+                    style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px', padding: '10px 18px', border: '2px dashed #cbd5e0', borderRadius: '10px', background: '#f8fafc', color: '#667eea', fontWeight: 600, cursor: 'pointer' }}
+                  >
+                    <Upload size={16} /> Upload File
+                  </button>
+                  {fileName && (
+                    <div style={{ padding: '10px 14px', background: '#f0fff4', border: '1px solid #c6f6d5', borderRadius: '8px', marginBottom: '12px', fontSize: '0.88rem', color: '#276749' }}>
+                      📄 {fileName}
+                    </div>
+                  )}
+                  <p className="file-hint" style={{ color: '#a0aec0', fontSize: '0.8rem' }}>
+                    Or paste a link below (Google Drive, Dropbox, etc.)
+                  </p>
                   <input
                     type="url"
-                    value={submissionContent}
-                    onChange={(e) => setSubmissionContent(e.target.value)}
-                    placeholder="File link (Google Drive, Dropbox, etc.)"
+                    value={submissionContent.startsWith('blob:') ? '' : submissionContent}
+                    onChange={(e) => {
+                      setSubmissionContent(e.target.value);
+                      setFileName('');
+                    }}
+                    placeholder="https://drive.google.com/... (optional if file uploaded)"
                     className="form-input"
+                    style={{ marginTop: '8px' }}
                   />
-                  <p className="file-hint">
-                    Upload your file to Google Drive or Dropbox, then paste the sharing link above.
-                  </p>
                 </div>
               )}
 

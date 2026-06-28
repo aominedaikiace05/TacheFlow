@@ -15,9 +15,12 @@ const Dashboard = () => {
   const [subjectFilter, setSubjectFilter] = useState('all');
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(null);
 
   useEffect(() => {
     fetchTasks();
+    const savedPhoto = localStorage.getItem('profilePhoto');
+    if (savedPhoto) setProfilePhoto(savedPhoto);
   }, []);
 
   const fetchTasks = async () => {
@@ -138,7 +141,12 @@ const Dashboard = () => {
         {/* Header */}
         <div className="dashboard-header">
           <div className="welcome-section">
-            <h1>Welcome back, {user.name}!</h1>
+            <div className="welcome-row">
+              {profilePhoto && (
+                <img src={profilePhoto} alt="Profile" className="dashboard-avatar" />
+              )}
+              <h1>Welcome back, {user.name}!</h1>
+            </div>
             <p>{overdueTasks > 0 ? `⚠️ You have ${overdueTasks} overdue task${overdueTasks > 1 ? 's' : ''}` : 'All caught up — nice work!'}</p>
           </div>
           <button onClick={() => setShowTaskForm(true)} className="btn btn-primary add-task-btn">

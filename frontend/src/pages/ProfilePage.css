@@ -1,9 +1,13 @@
-.profile-page { min-height: calc(100vh - 80px); padding: 32px 0; background: #f8fafc; }
+.profile-page { min-height: calc(100vh - 80px); padding: 32px 0; background: #fdf8f0; }
 .profile-page h1 { display: flex; align-items: center; gap: 12px; font-size: 2rem; font-weight: 800; color: #1a202c; margin-bottom: 32px; }
 
 .profile-grid { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; }
 .profile-card { background: white; border-radius: 20px; padding: 36px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }
-.profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 2rem; font-weight: 900; color: white; }
+.profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2rem; font-weight: 900; color: white; overflow: hidden; }
+.profile-avatar-img { width: 100%; height: 100%; object-fit: cover; }
+.profile-avatar-wrapper { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 16px; }
+.photo-upload-btn { background: none; border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px 12px; font-size: 0.78rem; font-weight: 600; color: #667eea; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s; }
+.photo-upload-btn:hover { background: rgba(102,126,234,0.08); border-color: #667eea; }
 .profile-card h2 { font-size: 1.3rem; font-weight: 800; color: #1a202c; margin-bottom: 4px; }
 .profile-email { color: #718096; font-size: 0.9rem; margin-bottom: 24px; }
 .profile-stats { display: flex; flex-direction: column; gap: 10px; text-align: left; }

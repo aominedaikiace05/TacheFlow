@@ -1,4 +1,4 @@
-.grades-page { min-height: calc(100vh - 80px); padding: 32px 0; background: #f8fafc; }
+.grades-page { min-height: calc(100vh - 80px); padding: 32px 0; background: #fdf8f0; }
 .grades-page h1 { display: flex; align-items: center; gap: 12px; font-size: 2rem; font-weight: 800; color: #1a202c; margin-bottom: 32px; }
 
 .overall-grade { display: flex; align-items: center; gap: 24px; background: white; border-radius: 20px; padding: 32px; margin-bottom: 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; }

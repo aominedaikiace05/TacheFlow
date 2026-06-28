@@ -39,23 +39,31 @@ const Navbar = () => {
     const notifs = [];
 
     const overdue = taskList.filter(t => t.status === 'pending' && new Date(t.dueDate) < now);
-    if (overdue.length > 0) notifs.push({ text: `${overdue.length} task${overdue.length > 1 ? 's' : ''} overdue`, type: 'danger' });
+    overdue.forEach(t => {
+      notifs.push({ text: `"${t.title}" is overdue`, type: 'danger', taskId: t._id });
+    });
 
     const today = taskList.filter(t => {
       const d = new Date(t.dueDate);
       return t.status === 'pending' && d.toDateString() === now.toDateString();
     });
-    if (today.length > 0) notifs.push({ text: `${today.length} task${today.length > 1 ? 's' : ''} due today`, type: 'warning' });
+    today.forEach(t => {
+      notifs.push({ text: `"${t.title}" is due today`, type: 'warning', taskId: t._id });
+    });
 
     const tomorrow = taskList.filter(t => {
       const d = new Date(t.dueDate);
       const tom = new Date(now); tom.setDate(tom.getDate() + 1);
       return t.status === 'pending' && d.toDateString() === tom.toDateString();
     });
-    if (tomorrow.length > 0) notifs.push({ text: `${tomorrow.length} task${tomorrow.length > 1 ? 's' : ''} due tomorrow`, type: 'info' });
+    tomorrow.forEach(t => {
+      notifs.push({ text: `"${t.title}" is due tomorrow`, type: 'info', taskId: t._id });
+    });
 
     const turnedIn = taskList.filter(t => t.turnedIn);
-    if (turnedIn.length > 0) notifs.push({ text: `${turnedIn.length} assignment${turnedIn.length > 1 ? 's' : ''} turned in`, type: 'success' });
+    turnedIn.forEach(t => {
+      notifs.push({ text: `"${t.title}" turned in`, type: 'success', taskId: t._id });
+    });
 
     setNotifications(notifs);
   };
@@ -143,7 +151,7 @@ const Navbar = () => {
                       <div className="notif-empty">All caught up! 🎉</div>
                     ) : (
                       notifications.map((n, i) => (
-                        <div key={i} className={`notif-item notif-${n.type}`}>{n.text}</div>
+                        <div key={i} className={`notif-item notif-${n.type}`} onClick={() => { navigate(`/task/${n.taskId}`); setShowNotifs(false); }} style={{ cursor: 'pointer' }}>{n.text}</div>
                       ))
                     )}
                   </div>

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import api from '../services/api';
 import toast from 'react-hot-toast';
-import { User, Mail, Lock, Save, Calendar, CheckSquare } from 'lucide-react';
+import { User, Mail, Lock, Save, Calendar, CheckSquare, Camera } from 'lucide-react';
 import './ProfilePage.css';
 
 const ProfilePage = () => {
@@ -12,14 +12,35 @@ const ProfilePage = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [tasks, setTasks] = useState([]);
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const photoInputRef = useRef(null);
 
   useEffect(() => {
     if (user) { setName(user.name); setEmail(user.email); }
+    // Load saved profile photo from localStorage
+    const savedPhoto = localStorage.getItem('profilePhoto');
+    if (savedPhoto) setProfilePhoto(savedPhoto);
     const fetchTasks = async () => {
       try { const res = await api.get('/tasks'); setTasks(res.data.tasks); } catch (e) {}
     };
     fetchTasks();
   }, [user]);
+
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfilePhoto(reader.result);
+      localStorage.setItem('profilePhoto', reader.result);
+      toast.success('Profile photo updated!');
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
@@ -53,8 +74,28 @@ const ProfilePage = () => {
 
         <div className="profile-grid">
           <div className="profile-card">
-            <div className="profile-avatar">
-              <span>{user?.name?.charAt(0)?.toUpperCase() || 'U'}</span>
+            <div className="profile-avatar-wrapper">
+              <div className="profile-avatar">
+                {profilePhoto ? (
+                  <img src={profilePhoto} alt="Profile" className="profile-avatar-img" />
+                ) : (
+                  <span>{user?.name?.charAt(0)?.toUpperCase() || 'U'}</span>
+                )}
+              </div>
+              <input
+                type="file"
+                ref={photoInputRef}
+                onChange={handlePhotoUpload}
+                accept="image/*"
+                style={{ display: 'none' }}
+              />
+              <button
+                type="button"
+                className="photo-upload-btn"
+                onClick={() => photoInputRef.current && photoInputRef.current.click()}
+              >
+                <Camera size={14} /> Change Photo
+              </button>
             </div>
             <h2>{user?.name}</h2>
             <p className="profile-email">{user?.email}</p>

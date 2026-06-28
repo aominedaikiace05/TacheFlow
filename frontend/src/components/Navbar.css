@@ -1,5 +1,5 @@
 .navbar {
-  background: #ffffff;
+  background: #fdf8f0;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
   padding: 0.8rem 0;
@@ -41,8 +41,10 @@
 .notif-header { padding: 12px 16px; font-weight: 700; font-size: 0.9rem; border-bottom: 1px solid #e2e8f0; color: #1a202c; }
 .dark-mode .notif-header { border-color: #4a5568; color: white; }
 .notif-empty { padding: 20px 16px; text-align: center; color: #718096; font-size: 0.85rem; }
-.notif-item { padding: 10px 16px; font-size: 0.85rem; border-bottom: 1px solid #f1f5f9; }
+.notif-item { padding: 10px 16px; font-size: 0.85rem; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: background 0.2s; }
+.notif-item:hover { background: rgba(102, 126, 234, 0.06); }
 .dark-mode .notif-item { border-color: #4a5568; color: #e2e8f0; }
+.dark-mode .notif-item:hover { background: rgba(102, 126, 234, 0.1); }
 .notif-danger { color: #f56565; }
 .notif-warning { color: #f6ad55; }
 .notif-info { color: #667eea; }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, Calendar, FileText, Type, BookOpen, Flag, Award, Paperclip, Plus, Trash2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, Calendar, FileText, Type, BookOpen, Flag, Award, Paperclip, Plus, Trash2, Upload } from 'lucide-react';
 import './TaskForm.css';
 
 const SUBJECTS_PRESET = [
@@ -21,6 +21,7 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
   const [attachments, setAttachments] = useState([]);
   const [newAttachName, setNewAttachName] = useState('');
   const [newAttachUrl, setNewAttachUrl] = useState('');
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (task) {
@@ -81,9 +82,31 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
 
   const handleAddAttachment = () => {
     if (!newAttachName.trim() || !newAttachUrl.trim()) return;
-    setAttachments(prev => [...prev, { name: newAttachName.trim(), url: newAttachUrl.trim(), type: 'file' }]);
+    setAttachments(prev => [...prev, { name: newAttachName.trim(), url: newAttachUrl.trim(), type: 'link' }]);
     setNewAttachName('');
     setNewAttachUrl('');
+  };
+
+  const handleFileUpload = (e) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    Array.from(files).forEach(file => {
+      // Create a local URL for the file (in production, you'd upload to cloud storage)
+      const fileUrl = URL.createObjectURL(file);
+      setAttachments(prev => [...prev, { 
+        name: file.name, 
+        url: fileUrl, 
+        type: 'file',
+        size: file.size,
+        fileObj: file
+      }]);
+    });
+
+    // Reset file input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const handleRemoveAttachment = (index) => {
@@ -235,8 +258,13 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
               <div className="attachments-list">
                 {attachments.map((att, i) => (
                   <div key={i} className="attachment-item">
-                    <span className="attachment-name">📎 {att.name}</span>
-                    <a href={att.url} target="_blank" rel="noreferrer" className="attachment-url">{att.url}</a>
+                    <span className="attachment-name">{att.type === 'file' ? '📄' : '🔗'} {att.name}</span>
+                    {att.type === 'link' && (
+                      <a href={att.url} target="_blank" rel="noreferrer" className="attachment-url">{att.url}</a>
+                    )}
+                    {att.type === 'file' && att.size && (
+                      <span className="attachment-url">{(att.size / 1024).toFixed(1)} KB</span>
+                    )}
                     <button type="button" className="attachment-remove" onClick={() => handleRemoveAttachment(i)}>
                       <Trash2 size={14} />
                     </button>
@@ -245,34 +273,28 @@ const TaskForm = ({ task, onSubmit, onClose }) => {
               </div>
             )}
 
-            <div className="add-attachment-row">
+            {/* File upload button */}
+            <div className="file-upload-section">
               <input
-                type="text"
-                value={newAttachName}
-                onChange={(e) => setNewAttachName(e.target.value)}
-                className="form-input"
-                placeholder="File name (e.g. Assignment_Instructions.pdf)"
-                style={{ flex: 1 }}
-              />
-              <input
-                type="url"
-                value={newAttachUrl}
-                onChange={(e) => setNewAttachUrl(e.target.value)}
-                className="form-input"
-                placeholder="Paste link (Google Drive, etc.)"
-                style={{ flex: 1 }}
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+                multiple
+                accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.xlsx,.pptx,.zip"
+                style={{ display: 'none' }}
+                id="file-upload-input"
               />
               <button
                 type="button"
-                className="btn btn-secondary add-attach-btn"
-                onClick={handleAddAttachment}
-                disabled={!newAttachName.trim() || !newAttachUrl.trim()}
+                className="btn btn-secondary file-upload-btn"
+                onClick={() => fileInputRef.current && fileInputRef.current.click()}
               >
-                <Plus size={16} /> Add
+                <Upload size={16} /> Upload File
               </button>
+              <span className="file-upload-hint">PDF, DOC, images, etc.</span>
             </div>
             <small style={{ color: '#a0aec0', fontSize: '0.78rem' }}>
-              Upload files to Google Drive, then paste the sharing link here.
+              Upload files directly from your computer.
             </small>
           </div>
 

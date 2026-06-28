@@ -1,7 +1,7 @@
 .task-detail {
   min-height: calc(100vh - 80px);
   padding: 32px 0;
-  background: linear-gradient(135deg, #fafbfc 0%, #f7fafc 100%);
+  background: linear-gradient(135deg, #fdf8f0 0%, #faf5eb 100%);
 }
 
 .task-detail-loading {
