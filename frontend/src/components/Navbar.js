@@ -101,11 +101,71 @@ const Navbar = () => {
           <span>TâcheFlow</span>
         </Link>
 
-        {/* Mobile hamburger button */}
+        {/* Icons always visible in top bar on mobile */}
         {user && (
-          <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="navbar-top-actions">
+            {/* Search */}
+            <div className="nav-search-wrapper">
+              <button className="nav-icon-btn" onClick={() => setShowSearch(!showSearch)} title="Search">
+                <Search size={18} />
+              </button>
+              {showSearch && (
+                <div className="search-dropdown">
+                  <div className="search-input-wrap">
+                    <Search size={16} />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={e => handleSearch(e.target.value)}
+                      placeholder="Search tasks..."
+                      autoFocus
+                    />
+                    <button onClick={() => { setShowSearch(false); setSearchQuery(''); setSearchResults([]); }}><X size={16} /></button>
+                  </div>
+                  {searchResults.length > 0 && (
+                    <div className="search-results">
+                      {searchResults.map(t => (
+                        <div key={t._id} className="search-result-item" onClick={() => { navigate(`/task/${t._id}`); setShowSearch(false); }}>
+                          <span className="sr-title">{t.title}</span>
+                          {t.subject && <span className="sr-subject">{t.subject}</span>}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Notifications */}
+            <div className="nav-notif-wrapper">
+              <button className="nav-icon-btn" onClick={() => setShowNotifs(!showNotifs)} title="Notifications">
+                <Bell size={18} />
+                {notifications.length > 0 && <span className="notif-badge">{notifications.length}</span>}
+              </button>
+              {showNotifs && (
+                <div className="notif-dropdown">
+                  <div className="notif-header">Notifications</div>
+                  {notifications.length === 0 ? (
+                    <div className="notif-empty">All caught up! 🎉</div>
+                  ) : (
+                    notifications.map((n, i) => (
+                      <div key={i} className={`notif-item notif-${n.type}`} onClick={() => { navigate(`/task/${n.taskId}`); setShowNotifs(false); }} style={{ cursor: 'pointer' }}>{n.text}</div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Dark mode */}
+            <button className="nav-icon-btn" onClick={toggleDarkMode} title={darkMode ? 'Light mode' : 'Dark mode'}>
+              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            {/* Mobile hamburger button */}
+            <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         )}
 
         <div className={`navbar-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
@@ -119,37 +179,13 @@ const Navbar = () => {
                 ))}
               </div>
 
-              <div className="navbar-actions">
+              {/* Desktop-only actions (hidden on mobile since they're in top bar) */}
+              <div className="navbar-actions desktop-only">
                 {/* Search */}
                 <div className="nav-search-wrapper">
                   <button className="nav-icon-btn" onClick={() => setShowSearch(!showSearch)} title="Search">
                     <Search size={18} />
                   </button>
-                  {showSearch && (
-                    <div className="search-dropdown">
-                      <div className="search-input-wrap">
-                        <Search size={16} />
-                        <input
-                          type="text"
-                          value={searchQuery}
-                          onChange={e => handleSearch(e.target.value)}
-                          placeholder="Search tasks..."
-                          autoFocus
-                        />
-                        <button onClick={() => { setShowSearch(false); setSearchQuery(''); setSearchResults([]); }}><X size={16} /></button>
-                      </div>
-                      {searchResults.length > 0 && (
-                        <div className="search-results">
-                          {searchResults.map(t => (
-                            <div key={t._id} className="search-result-item" onClick={() => { navigate(`/task/${t._id}`); setShowSearch(false); }}>
-                              <span className="sr-title">{t.title}</span>
-                              {t.subject && <span className="sr-subject">{t.subject}</span>}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
                 </div>
 
                 {/* Notifications */}
@@ -158,18 +194,6 @@ const Navbar = () => {
                     <Bell size={18} />
                     {notifications.length > 0 && <span className="notif-badge">{notifications.length}</span>}
                   </button>
-                  {showNotifs && (
-                    <div className="notif-dropdown">
-                      <div className="notif-header">Notifications</div>
-                      {notifications.length === 0 ? (
-                        <div className="notif-empty">All caught up! 🎉</div>
-                      ) : (
-                        notifications.map((n, i) => (
-                          <div key={i} className={`notif-item notif-${n.type}`} onClick={() => { navigate(`/task/${n.taskId}`); setShowNotifs(false); }} style={{ cursor: 'pointer' }}>{n.text}</div>
-                        ))
-                      )}
-                    </div>
-                  )}
                 </div>
 
                 {/* Dark mode */}

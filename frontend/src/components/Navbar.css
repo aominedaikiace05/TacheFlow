@@ -88,11 +88,21 @@
 .mobile-menu-btn:hover { color: #667eea; background: rgba(102,126,234,0.08); }
 .dark-mode .mobile-menu-btn { color: #a0aec0; }
 
-/* Navbar actions group */
+/* Top actions always visible on mobile */
+.navbar-top-actions {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Navbar actions group (desktop) */
 .navbar-actions { display: flex; align-items: center; gap: 4px; }
+.desktop-only { display: flex; }
 
 @media (max-width: 768px) {
   .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
+  .navbar-top-actions { display: flex; }
+  .desktop-only { display: none !important; }
 
   .navbar-menu {
     display: none;
@@ -133,16 +143,6 @@
 
   .nav-link span { display: inline !important; }
 
-  .navbar-actions {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    padding: 8px 0;
-    border-top: 1px solid #e2e8f0;
-  }
-
-  .dark-mode .navbar-actions { border-color: #4a5568; }
-
   .navbar-user {
     width: 100%;
     margin-left: 0;
@@ -156,13 +156,14 @@
 
   .user-welcome { display: none; }
 
-  .search-dropdown { position: fixed; top: auto; left: 16px; right: 16px; width: auto; }
-  .notif-dropdown { position: fixed; top: auto; left: 16px; right: 16px; width: auto; }
+  .search-dropdown { position: fixed; top: 60px; left: 16px; right: 16px; width: auto; }
+  .notif-dropdown { position: fixed; top: 60px; left: 16px; right: 16px; width: auto; }
 
   .navbar-container { position: relative; }
 }
 
 @media (min-width: 769px) {
+  .navbar-top-actions { display: none !important; }
   .navbar-menu { display: flex !important; align-items: center; gap: 8px; }
   .navbar-nav { display: flex; align-items: center; gap: 2px; margin-right: 8px; }
 }
