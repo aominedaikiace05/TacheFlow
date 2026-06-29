@@ -283,7 +283,7 @@ const TaskDetail = () => {
           </div>
         </div>
 
-        {/* Submissions Section */}
+        {/* Submissions Section - inside same flow */}
         <div className="submissions-section">
           <h2>
             <Paperclip size={22} />
@@ -464,42 +464,42 @@ const TaskDetail = () => {
               </button>
             </form>
           </div>
-        </div>
 
-        {/* Comments Section */}
-        <div className="comments-section">
-          <h2>
-            💬 Comments
-            {task.comments?.length > 0 && (
-              <span className="submission-count">{task.comments.length}</span>
-            )}
-          </h2>
+          {/* Comments */}
+          <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid #e2e8f0' }}>
+            <h2>
+              💬 Comments
+              {task.comments?.length > 0 && (
+                <span className="submission-count">{task.comments.length}</span>
+              )}
+            </h2>
 
-          {task.comments && task.comments.length > 0 && (
-            <div className="comments-list">
-              {task.comments.map(comment => (
-                <div key={comment._id} className="comment-item">
-                  <div className="comment-body">
-                    <p>{comment.text}</p>
-                    <span className="comment-time">{formatDateTime(comment.createdAt)}</span>
+            {task.comments && task.comments.length > 0 && (
+              <div className="comments-list">
+                {task.comments.map(comment => (
+                  <div key={comment._id} className="comment-item">
+                    <div className="comment-body">
+                      <p>{comment.text}</p>
+                      <span className="comment-time">{formatDateTime(comment.createdAt)}</span>
+                    </div>
+                    <button className="submission-delete" onClick={() => handleDeleteComment(comment._id)}>
+                      <Trash2 size={14} />
+                    </button>
                   </div>
-                  <button className="submission-delete" onClick={() => handleDeleteComment(comment._id)}>
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
 
-          <form onSubmit={handleAddComment} className="comment-form">
-            <input
-              type="text"
-              name="commentText"
-              placeholder="Add a comment..."
-              className="form-input"
-            />
-            <button type="submit" className="btn btn-primary comment-submit-btn">Post</button>
-          </form>
+            <form onSubmit={handleAddComment} className="comment-form">
+              <input
+                type="text"
+                name="commentText"
+                placeholder="Add a comment..."
+                className="form-input"
+              />
+              <button type="submit" className="btn btn-primary comment-submit-btn">Post</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
