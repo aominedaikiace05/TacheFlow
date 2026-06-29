@@ -35,9 +35,13 @@ const Navbar = () => {
     }
   }, [user, location.pathname]);
 
-  // Close mobile menu when navigating
+  // Close all dropdowns when navigating
   useEffect(() => {
     setMobileMenuOpen(false);
+    setShowSearch(false);
+    setShowNotifs(false);
+    setSearchQuery('');
+    setSearchResults([]);
   }, [location.pathname]);
 
   const generateNotifications = (taskList) => {
@@ -87,6 +91,7 @@ const Navbar = () => {
   const toggleSearch = () => {
     setShowSearch(!showSearch);
     setShowNotifs(false);
+    setMobileMenuOpen(false);
   };
 
   const toggleNotifs = () => {
@@ -94,6 +99,7 @@ const Navbar = () => {
     setShowSearch(false);
     setSearchQuery('');
     setSearchResults([]);
+    setMobileMenuOpen(false);
   };
 
   const handleLogout = () => { logout(); navigate('/login'); };
