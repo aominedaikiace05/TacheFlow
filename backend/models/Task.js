@@ -72,6 +72,12 @@ const taskSchema = new mongoose.Schema({
     min: 0,
     max: 1000
   },
+  earnedPoints: {
+    type: Number,
+    default: null,
+    min: 0,
+    max: 1000
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

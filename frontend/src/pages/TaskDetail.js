@@ -251,13 +251,42 @@ const TaskDetail = () => {
             )}
             {task.points > 0 && (
               <div className="meta-item">
-                <span className="detail-points">{task.points} points</span>
+                <span className="detail-points">
+                  {task.earnedPoints !== null && task.earnedPoints !== undefined 
+                    ? `${task.earnedPoints}/${task.points} points` 
+                    : `${task.points} points`}
+                </span>
               </div>
             )}
           </div>
 
           {/* Turn In Button */}
           <div className="turnin-section">
+
+            {/* Score Entry */}
+            {task.points > 0 && (
+              <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#4a5568' }}>My Score:</span>
+                <input
+                  type="number"
+                  min="0"
+                  max={task.points}
+                  value={task.earnedPoints !== null && task.earnedPoints !== undefined ? task.earnedPoints : ''}
+                  placeholder="—"
+                  onChange={async (e) => {
+                    const val = e.target.value === '' ? null : Number(e.target.value);
+                    try {
+                      const response = await api.put(`/tasks/${task._id}`, { earnedPoints: val });
+                      setTask(response.data.task);
+                    } catch (err) {
+                      toast.error('Failed to save score');
+                    }
+                  }}
+                  style={{ width: '70px', padding: '8px 12px', borderRadius: '8px', border: '2px solid #e2e8f0', fontSize: '1rem', fontWeight: 700, textAlign: 'center' }}
+                />
+                <span style={{ fontSize: '0.9rem', color: '#718096' }}>/ {task.points}</span>
+              </div>
+            )}
             <button
               className={`btn turnin-btn ${task.turnedIn ? 'turned-in' : 'btn-primary'}`}
               onClick={handleTurnIn}

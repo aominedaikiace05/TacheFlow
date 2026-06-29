@@ -97,7 +97,7 @@ exports.updateTask = async (req, res) => {
     const task = await Task.findOne({ _id: req.params.id, userId: req.user._id });
     if (!task) return res.status(404).json({ message: 'Task not found' });
 
-    const { title, description, dueDate, status, subject, priority, points, attachments } = req.body;
+    const { title, description, dueDate, status, subject, priority, points, earnedPoints, attachments } = req.body;
 
     if (title !== undefined) task.title = title;
     if (description !== undefined) task.description = description;
@@ -106,6 +106,7 @@ exports.updateTask = async (req, res) => {
     if (subject !== undefined) task.subject = subject;
     if (priority !== undefined) task.priority = priority;
     if (points !== undefined) task.points = points;
+    if (earnedPoints !== undefined) task.earnedPoints = earnedPoints;
     if (attachments !== undefined) task.attachments = attachments;
 
     await task.save();
