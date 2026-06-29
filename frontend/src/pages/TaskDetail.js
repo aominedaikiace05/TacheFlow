@@ -346,7 +346,11 @@ const TaskDetail = () => {
                   value={task.earnedPoints !== null && task.earnedPoints !== undefined ? task.earnedPoints : ''}
                   placeholder="—"
                   onChange={async (e) => {
-                    const val = e.target.value === '' ? null : Number(e.target.value);
+                    let val = e.target.value === '' ? null : Number(e.target.value);
+                    if (val !== null) {
+                      if (val < 0) val = 0;
+                      if (val > task.points) val = task.points;
+                    }
                     try {
                       const response = await api.put(`/tasks/${task._id}`, { earnedPoints: val });
                       setTask(response.data.task);
