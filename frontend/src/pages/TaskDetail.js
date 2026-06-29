@@ -354,7 +354,7 @@ const TaskDetail = () => {
                       toast.error('Failed to save score');
                     }
                   }}
-                  style={{ width: '70px', padding: '8px 12px', borderRadius: '8px', border: '2px solid #e2e8f0', fontSize: '1.1rem', fontWeight: 700, textAlign: 'center' }}
+                  style={{ width: '90px', padding: '8px 12px', borderRadius: '8px', border: '2px solid #e2e8f0', fontSize: '1.1rem', fontWeight: 700, textAlign: 'center' }}
                 />
                 <span style={{ fontSize: '0.95rem', color: '#718096', fontWeight: 600 }}>/ {task.points}</span>
               </div>
