@@ -186,6 +186,31 @@ const Navbar = () => {
                   <button className="nav-icon-btn" onClick={() => setShowSearch(!showSearch)} title="Search">
                     <Search size={18} />
                   </button>
+                  {showSearch && (
+                    <div className="search-dropdown">
+                      <div className="search-input-wrap">
+                        <Search size={16} />
+                        <input
+                          type="text"
+                          value={searchQuery}
+                          onChange={e => handleSearch(e.target.value)}
+                          placeholder="Search tasks..."
+                          autoFocus
+                        />
+                        <button onClick={() => { setShowSearch(false); setSearchQuery(''); setSearchResults([]); }}><X size={16} /></button>
+                      </div>
+                      {searchResults.length > 0 && (
+                        <div className="search-results">
+                          {searchResults.map(t => (
+                            <div key={t._id} className="search-result-item" onClick={() => { navigate(`/task/${t._id}`); setShowSearch(false); }}>
+                              <span className="sr-title">{t.title}</span>
+                              {t.subject && <span className="sr-subject">{t.subject}</span>}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Notifications */}
@@ -194,6 +219,18 @@ const Navbar = () => {
                     <Bell size={18} />
                     {notifications.length > 0 && <span className="notif-badge">{notifications.length}</span>}
                   </button>
+                  {showNotifs && (
+                    <div className="notif-dropdown">
+                      <div className="notif-header">Notifications</div>
+                      {notifications.length === 0 ? (
+                        <div className="notif-empty">All caught up! 🎉</div>
+                      ) : (
+                        notifications.map((n, i) => (
+                          <div key={i} className={`notif-item notif-${n.type}`} onClick={() => { navigate(`/task/${n.taskId}`); setShowNotifs(false); }} style={{ cursor: 'pointer' }}>{n.text}</div>
+                        ))
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Dark mode */}

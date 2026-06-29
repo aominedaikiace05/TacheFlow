@@ -156,8 +156,8 @@
 
   .user-welcome { display: none; }
 
-  .search-dropdown { position: fixed; top: 60px; left: 16px; right: 16px; width: auto; }
-  .notif-dropdown { position: fixed; top: 60px; left: 16px; right: 16px; width: auto; }
+  .search-dropdown { position: fixed; top: 60px; left: 16px; right: 16px; width: auto; z-index: 9999; }
+  .notif-dropdown { position: fixed; top: 60px; left: 16px; right: 16px; width: auto; z-index: 9999; max-height: 60vh; overflow-y: auto; }
 
   .navbar-container { position: relative; }
 }
@@ -166,4 +166,5 @@
   .navbar-top-actions { display: none !important; }
   .navbar-menu { display: flex !important; align-items: center; gap: 8px; }
   .navbar-nav { display: flex; align-items: center; gap: 2px; margin-right: 8px; }
+  .desktop-only { display: flex !important; }
 }
