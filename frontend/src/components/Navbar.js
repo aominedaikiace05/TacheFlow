@@ -84,6 +84,18 @@ const Navbar = () => {
     setSearchResults(results.slice(0, 5));
   };
 
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+    setShowNotifs(false);
+  };
+
+  const toggleNotifs = () => {
+    setShowNotifs(!showNotifs);
+    setShowSearch(false);
+    setSearchQuery('');
+    setSearchResults([]);
+  };
+
   const handleLogout = () => { logout(); navigate('/login'); };
 
   const navLinks = [
@@ -106,7 +118,7 @@ const Navbar = () => {
           <div className="navbar-top-actions">
             {/* Search */}
             <div className="nav-search-wrapper">
-              <button className="nav-icon-btn" onClick={() => setShowSearch(!showSearch)} title="Search">
+              <button className="nav-icon-btn" onClick={toggleSearch} title="Search">
                 <Search size={18} />
               </button>
               {showSearch && (
@@ -138,7 +150,7 @@ const Navbar = () => {
 
             {/* Notifications */}
             <div className="nav-notif-wrapper">
-              <button className="nav-icon-btn" onClick={() => setShowNotifs(!showNotifs)} title="Notifications">
+              <button className="nav-icon-btn" onClick={toggleNotifs} title="Notifications">
                 <Bell size={18} />
                 {notifications.length > 0 && <span className="notif-badge">{notifications.length}</span>}
               </button>
@@ -183,7 +195,7 @@ const Navbar = () => {
               <div className="navbar-actions desktop-only">
                 {/* Search */}
                 <div className="nav-search-wrapper">
-                  <button className="nav-icon-btn" onClick={() => setShowSearch(!showSearch)} title="Search">
+                  <button className="nav-icon-btn" onClick={toggleSearch} title="Search">
                     <Search size={18} />
                   </button>
                   {showSearch && (
@@ -215,7 +227,7 @@ const Navbar = () => {
 
                 {/* Notifications */}
                 <div className="nav-notif-wrapper">
-                  <button className="nav-icon-btn" onClick={() => setShowNotifs(!showNotifs)} title="Notifications">
+                  <button className="nav-icon-btn" onClick={toggleNotifs} title="Notifications">
                     <Bell size={18} />
                     {notifications.length > 0 && <span className="notif-badge">{notifications.length}</span>}
                   </button>
