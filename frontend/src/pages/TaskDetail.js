@@ -65,7 +65,15 @@ const TaskDetail = () => {
       setTask(response.data.task);
       setSubmissionContent('');
       setFileName('');
-      toast.success('Submission added!');
+      
+      // Also turn in if not already turned in
+      if (!response.data.task.turnedIn) {
+        const turnInResponse = await api.patch(`/tasks/${id}/turnin`);
+        setTask(turnInResponse.data.task);
+        toast.success('Submitted & turned in!');
+      } else {
+        toast.success('Submission added!');
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || 'Failed to submit');
     } finally {
@@ -262,16 +270,6 @@ const TaskDetail = () => {
 
           {/* Turn In Button */}
           <div className="turnin-section">
-            <button
-              className={`btn turnin-btn ${task.turnedIn ? 'turned-in' : 'btn-primary'}`}
-              onClick={handleTurnIn}
-            >
-              {task.turnedIn ? (
-                <><CheckCircle size={18} /> Unsubmit</>
-              ) : (
-                <><Send size={18} /> Turn In</>
-              )}
-            </button>
             {task.turnedIn && task.turnedInAt && (
               <span className="turnin-info">
                 Turned in {formatDateTime(task.turnedInAt)}
@@ -464,8 +462,19 @@ const TaskDetail = () => {
                 disabled={submitting || !submissionContent.trim()}
               >
                 <Send size={18} />
-                {submitting ? 'Submitting...' : 'Submit'}
+                {submitting ? 'Submitting...' : task.turnedIn ? 'Add Submission' : 'Submit & Turn In'}
               </button>
+
+              {task.turnedIn && (
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleTurnIn}
+                  style={{ marginTop: '8px', width: '100%' }}
+                >
+                  <CheckCircle size={18} /> Unsubmit
+                </button>
+              )}
             </form>
           </div>
 
