@@ -19,7 +19,7 @@ const GradesPage = () => {
     const subTasks = tasks.filter(t => t.subject === sub && t.points > 0);
     const completed = subTasks.filter(t => t.status === 'completed');
     const totalPossible = subTasks.reduce((sum, t) => sum + t.points, 0);
-    const earned = completed.reduce((sum, t) => sum + t.points, 0);
+    const earned = completed.reduce((sum, t) => sum + (t.earnedPoints !== null && t.earnedPoints !== undefined ? t.earnedPoints : t.points), 0);
     const pct = totalPossible > 0 ? Math.round((earned / totalPossible) * 100) : 0;
     return { name: sub, earned, totalPossible, completed: completed.length, total: subTasks.length, pct };
   });
