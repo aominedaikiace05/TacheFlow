@@ -17,11 +17,11 @@ const GradesPage = () => {
 
   const subjectGrades = subjects.map(sub => {
     const subTasks = tasks.filter(t => t.subject === sub && t.points > 0);
-    const completed = subTasks.filter(t => t.status === 'completed');
+    const graded = subTasks.filter(t => t.earnedPoints !== null && t.earnedPoints !== undefined);
     const totalPossible = subTasks.reduce((sum, t) => sum + t.points, 0);
-    const earned = completed.reduce((sum, t) => sum + (t.earnedPoints !== null && t.earnedPoints !== undefined ? t.earnedPoints : t.points), 0);
+    const earned = subTasks.reduce((sum, t) => sum + (t.earnedPoints !== null && t.earnedPoints !== undefined ? t.earnedPoints : 0), 0);
     const pct = totalPossible > 0 ? Math.round((earned / totalPossible) * 100) : 0;
-    return { name: sub, earned, totalPossible, completed: completed.length, total: subTasks.length, pct };
+    return { name: sub, earned, totalPossible, graded: graded.length, total: subTasks.length, pct };
   });
 
   const overallEarned = subjectGrades.reduce((s, g) => s + g.earned, 0);
@@ -69,7 +69,7 @@ const GradesPage = () => {
                   <div className="grade-bar-fill" style={{ width: `${g.pct}%` }}></div>
                 </div>
                 <div className="grade-card-stats">
-                  <span><CheckCircle size={14} /> {g.completed}/{g.total} tasks</span>
+                  <span><CheckCircle size={14} /> {g.graded}/{g.total} graded</span>
                   <span><TrendingUp size={14} /> {g.earned}/{g.totalPossible} pts ({g.pct}%)</span>
                 </div>
               </div>
